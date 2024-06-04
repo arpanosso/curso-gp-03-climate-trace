@@ -16,11 +16,10 @@ pré-processamento e visualização de dados com o R.
 
 ------------------------------------------------------------------------
 
-<img src="img/ppt-logo.png" style="width:5.0%" /> [Panorama das emissões
-no
+![](img/ppt-logo.png) [Panorama das emissões no
 Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
-<img src="img/ppt-logo.png" style="width:5.0%" /> [Bases Físicas das
+![](img/ppt-logo.png) [Bases Físicas das
 MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 ------------------------------------------------------------------------
