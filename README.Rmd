@@ -29,12 +29,12 @@ No minicurso falaremos sobre as bases físicas das mudanças climáticas globais
 
 ---
 
-![](img/ppt-logo.png) 
-[Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+![](img/ppt-logo.png){width=10%}
+ [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 
-![](img/ppt-logo.png)
-[Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+![](img/ppt-logo.png){width=10%}
+ [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 ---
 
