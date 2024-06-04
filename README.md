@@ -29,25 +29,35 @@ MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/maste
 
 ``` r
 library(tidyverse)
+#> Warning: package 'tidyverse' was built under R version 4.2.3
+#> Warning: package 'ggplot2' was built under R version 4.2.3
+#> Warning: package 'tibble' was built under R version 4.2.3
+#> Warning: package 'tidyr' was built under R version 4.2.3
+#> Warning: package 'readr' was built under R version 4.2.3
+#> Warning: package 'purrr' was built under R version 4.2.3
+#> Warning: package 'dplyr' was built under R version 4.2.3
+#> Warning: package 'forcats' was built under R version 4.2.3
+#> Warning: package 'lubridate' was built under R version 4.2.3
 #> ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-#> ✔ dplyr     1.1.4     ✔ readr     2.1.5
-#> ✔ forcats   1.0.0     ✔ stringr   1.5.1
-#> ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-#> ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-#> ✔ purrr     1.0.2     
+#> ✔ dplyr     1.1.2     ✔ readr     2.1.4
+#> ✔ forcats   1.0.0     ✔ stringr   1.5.0
+#> ✔ ggplot2   3.5.0     ✔ tibble    3.2.1
+#> ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+#> ✔ purrr     1.0.1     
 #> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 #> ✖ dplyr::filter() masks stats::filter()
 #> ✖ dplyr::lag()    masks stats::lag()
 #> ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 library(treemapify)
+#> Warning: package 'treemapify' was built under R version 4.2.3
 library(geobr)
 #> Loading required namespace: sf
 source("R/base_map.R")
 source("R/my_function.R")
-#> Using year/date 2010
-#> Using year/date 2019
-#> Using year/date 201909
-#> Using year/date 201907
+#> Using year 2010
+#> Using year 2019
+#> Using year 201909
+#> Using year 201907
 ```
 
 ``` r
@@ -79,9 +89,10 @@ conservacao <- read_rds("data/conservacao.rds")
 
 ``` r
 estados <- geobr::read_state()
-#> Using year/date 2010
+#> Using year 2010
+#>   |                                                                              |                                                                      |   0%
 conservacao <- geobr::read_conservation_units()
-#> Using year/date 201909
+#> Using year 201909
 conservacao %>%
   filter(str_detect(name_organization,"SP"))
 #> Simple feature collection with 44 features and 14 fields
@@ -172,11 +183,13 @@ estados  %>%
   filter(name_state=="São Paulo") %>%
   ggplot() +
     geom_sf(fill="white", color="black",
-          size=.15, show.legend = FALSE) +
-  geom_sf(data=conservacao %>%
-            filter(str_detect(name_organization,"SP")),
+          size=.15, show.legend = FALSE,
+          alpha=.5) +
+  geom_sf(data=conservacao #%>%
+            #filter(str_detect(name_organization,"SP"))
+          ,
          color= conservacao %>%
-           filter(str_detect(name_organization,"SP")) %>%
+           #filter(str_detect(name_organization,"SP")) %>%
            pull(code_conservation_unit),
          fill=NA)+
   geom_sf(fill=NA, color="black",
