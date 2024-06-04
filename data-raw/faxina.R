@@ -27,3 +27,27 @@ df <- df %>%
   relocate(lon,lat,ano,estado,municipio)
 df$ano %>% unique()
 write_rds(df,"data/emissoes_br.rds")
+
+
+states <- read_rds("data/states.rds") %>%
+  mutate(name_region = ifelse(name_region == "Centro Oeste","Centro-Oeste",name_region))
+
+
+
+
+states <- geobr::read_state()
+write_rds(
+  states %>% tibble() %>%
+    mutate(name_region = ifelse(name_region == "Centro Oeste",
+                                "Centro-Oeste",name_region)),
+  "data/estados.rds")
+
+write_rds(read_rds("data/emissoes_br.rds") %>%
+  rename(area_conservacao = area_conservcao),"data/emissoes_br.rds")
+
+
+conservacao <- geobr::read_conservation_units()
+
+write_rds(
+  conservacao %>% tibble(),
+  "data/conservacao.rds")
