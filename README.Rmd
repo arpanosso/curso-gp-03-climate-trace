@@ -76,11 +76,13 @@ estados  %>%
   filter(name_state=="São Paulo") %>%
   ggplot() +
     geom_sf(fill="white", color="black",
-          size=.15, show.legend = FALSE) +
-  geom_sf(data=conservacao %>%
-            filter(str_detect(name_organization,"SP")),
+          size=.15, show.legend = FALSE,
+          alpha=.5) +
+  geom_sf(data=conservacao #%>%
+            #filter(str_detect(name_organization,"SP"))
+          ,
          color= conservacao %>%
-           filter(str_detect(name_organization,"SP")) %>%
+           #filter(str_detect(name_organization,"SP")) %>%
            pull(code_conservation_unit),
          fill=NA)+
   geom_sf(fill=NA, color="black",
