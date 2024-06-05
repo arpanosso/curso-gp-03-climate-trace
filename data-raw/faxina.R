@@ -55,3 +55,6 @@ write_rds(
 df <- read_rds("data-raw/BRA.rds")
 writexl::write_xlsx(df,"data-raw/BRA.xlsx")
 
+df <- read_rds("data/emissoes_br.rds")
+writexl::write_xlsx(df %>%
+                      sample_n(100000),"data/emissoes_br.xlsx")

@@ -102,9 +102,9 @@ observe o arquivo:
   - No Windows: Clique com o botão direito no arquivo ZIP e selecione
     “Extrair Tudo…”, depois siga as instruções para escolher um local
     onde os arquivos serão extraídos.  
-  - Por padrão, os dados serão descompatados dentro de uma pasta como no
-    BRA, semelhante ao nome do arquivo baixado, localizada no mesmo
-    diretório onde o arquivo BRA.zip se encontra.
+  - Por padrão, os dados serão descompatados dentro de uma pasta com
+    nome BRA, semelhante ao nome do arquivo baixado, localizada no mesmo
+    diretório onde o arquivo **BRA.zip** se encontra.
 - Após descompactar, você verá os arquivos de dados e metadados que
   podem ser abertos e analisados.
 
@@ -112,16 +112,19 @@ observe o arquivo:
 
 **OBS:** Metadados são informações adicionais que descrevem os dados
 principais. Eles podem incluir: descrição das variáveis; explicação do
-que cada coluna ou campo de dados representa; Unidades de medida:
-unidades usadas; ou seja, qualquer outra informação relevante que ajude
-a entender e utilizar os dados corretamente.
+que cada coluna ou campo de dados representa; unidades usadas; ou seja,
+qualquer outra informação relevante que ajude a entender e utilizar os
+dados corretamente.
 
 **Dicas Adicionais**  
-+ Organização: Crie uma pasta dedicada em seu computador para armazenar
-os dados baixados, facilitando a organização e o acesso futuro.  
-+ Documentação: Leia a documentação ou notas técnicas fornecidas pela
-plataforma para entender melhor os dados e suas limitações.  
-+ Backup: Sempre faça backup dos dados importantes para evitar perdas
++ *Organização*: Crie uma pasta dedicada em seu computador para
+armazenar os dados baixados, facilitando a organização e o acesso
+futuro.  
++ *Documentação*: Leia a
+[documentação](https://github.com/climatetracecoalition/methodology-documents/tree/main/2023)
+ou notas técnicas fornecidas pela plataforma para entender melhor os
+dados e suas limitações: [Link](https://climatetrace.org/approach).  
++ *Backup*: Sempre faça backup dos dados importantes para evitar perdas
 acidentais.
 
 ------------------------------------------------------------------------
@@ -181,7 +184,9 @@ glimpse(dados_crus)
 #> $ capacity_factor           <dbl> 1.829090e-03, NA, 8.115846e-03, 4.953476e-03…
 ```
 
-### Observe o mesmo banco de dados em [EXCEL](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/data-raw/BRA.xlsx)
+### Observe o mesmo banco de dados em [BRA.xlsx](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/data-raw/BRA.xlsx)
+
+### O qual deverá ser estruturado/faxinado para [emissoes_br.xlsx](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/data/emissoes_br.xlsx)
 
     Correção de Inconsistências
 

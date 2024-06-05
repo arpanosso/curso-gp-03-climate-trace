@@ -94,19 +94,17 @@ Após o download terminar, acesse a pasta de downloads do seu computar e observe
   + Muitas vezes, os dados são compactados em um arquivo ZIP para facilitar o download. Um arquivo ZIP é um formato de arquivo que contém um ou mais arquivos compactados para reduzir o tamanho total e facilitar a transferência.   
   + Para descompactar o arquivo ZIP:  
       + No Windows: Clique com o botão direito no arquivo ZIP e selecione "Extrair Tudo...", depois siga as instruções para escolher um local onde os arquivos serão extraídos.  
-      + Por padrão, os dados serão descompatados dentro de uma pasta como no BRA, semelhante ao nome do arquivo baixado, localizada no mesmo diretório onde o arquivo BRA.zip se encontra.
+      + Por padrão, os dados serão descompatados dentro de uma pasta com nome BRA, semelhante ao nome do arquivo baixado, localizada no mesmo diretório onde o arquivo **BRA.zip** se encontra.
   + Após descompactar, você verá os arquivos de dados e metadados que podem ser abertos e analisados.
 
 ![](img/aq-ct08.png) 
 
-
-
-**OBS:** Metadados são informações adicionais que descrevem os dados principais. Eles podem incluir: descrição das variáveis; explicação do que cada coluna ou campo de dados representa; Unidades de medida: unidades usadas; ou seja, qualquer outra informação relevante que ajude a entender e utilizar os dados corretamente.
+**OBS:** Metadados são informações adicionais que descrevem os dados principais. Eles podem incluir: descrição das variáveis; explicação do que cada coluna ou campo de dados representa; unidades usadas; ou seja, qualquer outra informação relevante que ajude a entender e utilizar os dados corretamente.
 
 **Dicas Adicionais**  
-  + Organização: Crie uma pasta dedicada em seu computador para armazenar os dados baixados, facilitando a organização e o acesso futuro.  
-  + Documentação: Leia a documentação ou notas técnicas fornecidas pela plataforma para entender melhor os dados e suas limitações.  
-  + Backup: Sempre faça backup dos dados importantes para evitar perdas acidentais.
+  + *Organização*: Crie uma pasta dedicada em seu computador para armazenar os dados baixados, facilitando a organização e o acesso futuro.  
+  + *Documentação*: Leia a [documentação](https://github.com/climatetracecoalition/methodology-documents/tree/main/2023) ou notas técnicas fornecidas pela plataforma para entender melhor os dados e suas limitações: [Link](https://climatetrace.org/approach).  
+  + *Backup*: Sempre faça backup dos dados importantes para evitar perdas acidentais.
 
 ---
 
@@ -134,7 +132,10 @@ dados_crus <- read_rds("data-raw/BRA.rds")
 glimpse(dados_crus)
 ```
 
-### Observe o mesmo banco de dados em [EXCEL](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/data-raw/BRA.xlsx)
+### Observe o mesmo banco de dados em [BRA.xlsx](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/data-raw/BRA.xlsx)
+
+### O qual deverá ser estruturado/faxinado para [emissoes_br.xlsx](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/data/emissoes_br.xlsx)
+
 
     Correção de Inconsistências
 
