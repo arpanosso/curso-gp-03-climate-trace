@@ -134,7 +134,7 @@ dados_crus <- read_rds("data-raw/BRA.rds")
 glimpse(dados_crus)
 ```
 
-### Observe o mesmo banco de dados em [EXCEL]
+### Observe o mesmo banco de dados em [EXCEL](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/data-raw/BRA.xlsx)
 
     Correção de Inconsistências
 

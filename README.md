@@ -181,7 +181,7 @@ glimpse(dados_crus)
 #> $ capacity_factor           <dbl> 1.829090e-03, NA, 8.115846e-03, 4.953476e-03…
 ```
 
-### Observe o mesmo banco de dados em \[EXCEL\]
+### Observe o mesmo banco de dados em [EXCEL](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/data-raw/BRA.xlsx)
 
     Correção de Inconsistências
 
