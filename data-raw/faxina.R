@@ -51,3 +51,7 @@ conservacao <- geobr::read_conservation_units()
 write_rds(
   conservacao %>% tibble(),
   "data/conservacao.rds")
+
+df <- read_rds("data-raw/BRA.rds")
+writexl::write_xlsx(df,"data-raw/BRA.xlsx")
+
