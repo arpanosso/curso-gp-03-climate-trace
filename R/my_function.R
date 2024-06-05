@@ -1,7 +1,9 @@
-states <- geobr::read_state(showProgress = FALSE)
 biomes <- geobr::read_biomes(showProgress = FALSE)
-conservation <- geobr::read_conservation_units(showProgress = FALSE)
 indigenous <- geobr::read_indigenous_land(showProgress = FALSE)
+estados <- geobr::read_state(showProgress = FALSE)
+conservacao <- geobr::read_conservation_units(showProgress = FALSE)
+states <- estados
+conservation <- conservacao
 
 get_geobr_pol <- function(i) {
   states$geom |> purrr::pluck(i) |> as.matrix()
