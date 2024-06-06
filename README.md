@@ -476,8 +476,8 @@ dados %>%
 
 ``` r
 dados %>% 
-  filter(str_detect(municipio,"Dourados"),
-         estado == "MS",
+  filter(str_detect(municipio,"Jaboticabal"),
+         estado == "SP",
          ano == 2022,
          !sub_setor %in% c("forest-land-clearing",
                             "forest-land-degradation",
@@ -493,21 +493,51 @@ dados %>%
   arrange(emissao )  %>% 
   ungroup() %>% 
   mutate(Cumsum = cumsum(emissao))
-#> # A tibble: 23 × 5
-#>    setor                 nome_fonte              sub_setor       emissao  Cumsum
-#>    <chr>                 <chr>                   <chr>             <dbl>   <dbl>
-#>  1 forestry_and_land_use Glória de Dourados      net-shrubgrass  -8.37e4 -83726.
-#>  2 forestry_and_land_use Glória de Dourados      net-forest-land -1.44e4 -98086.
-#>  3 forestry_and_land_use Glória de Dourados      net-wetland     -4.64e1 -98132.
-#>  4 transportation        Dourados Airport        domestic-aviat…  0      -98132.
-#>  5 transportation        Dourados Airport        international-…  0      -98132.
-#>  6 waste                 ETE HARRY AMORIM        wastewater-tre…  3.00e1 -98102.
-#>  7 waste                 ETE LARANJA DOCE        wastewater-tre…  6.96e2 -97407.
-#>  8 waste                 ETE IPE   DOURADOS      wastewater-tre…  1.43e3 -95974.
-#>  9 waste                 ETE AGUA BOA   DOURADOS wastewater-tre…  2.43e3 -93549.
-#> 10 waste                 ETE GUAXINIM            wastewater-tre…  2.46e3 -91087.
-#> # ℹ 13 more rows
+#> # A tibble: 9 × 5
+#>   setor                 nome_fonte                     sub_setor emissao  Cumsum
+#>   <chr>                 <chr>                          <chr>       <dbl>   <dbl>
+#> 1 forestry_and_land_use Jaboticabal                    net-fore… -17490. -17490.
+#> 2 forestry_and_land_use Jaboticabal                    net-shru…   -756. -18246.
+#> 3 forestry_and_land_use Jaboticabal                    net-wetl…   -511. -18757.
+#> 4 agriculture           Jaboticabal                    manure-l…    965. -17792.
+#> 5 agriculture           Jaboticabal                    enteric-…   3352. -14440.
+#> 6 agriculture           Jaboticabal                    syntheti…   3568. -10872.
+#> 7 waste                 ETE JABOTICABAL   SP           wastewat…   4972.  -5900.
+#> 8 transportation        Jaboticabal Urban Area in Jab… road-tra…  98919.  93018.
+#> 9 agriculture           Jaboticabal                    cropland… 904747. 997766.
 ```
+
+``` r
+dados %>% 
+  filter(str_detect(municipio,"Alta Floresta"),
+         estado == "MT",
+         ano == 2022,
+         !sub_setor %in% c("forest-land-clearing",
+                            "forest-land-degradation",
+                            "shrubgrass-fires",
+                            "forest-land-fires",
+                            "wetland-fires",
+                            "removals")
+         ) %>% 
+  group_by(setor,sub_setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup() %>% 
+  mutate(
+    sub_setor = sub_setor %>% fct_reorder(emissao),
+    classe = ifelse(emissao > 0,"Fonte","Sumidouro")
+  ) %>% 
+  mutate(Cumsum = cumsum(emissao)) %>% 
+  ggplot(aes(x=emissao,y=sub_setor,fill=classe)) + 
+  geom_col(color="black") +
+  theme_bw() +
+  theme(
+    legend.position = "top"
+  )
+```
+
+![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
 ``` r
 # estados  %>%

@@ -275,8 +275,8 @@ dados %>%
 
 ```{r}
 dados %>% 
-  filter(str_detect(municipio,"Dourados"),
-         estado == "MS",
+  filter(str_detect(municipio,"Jaboticabal"),
+         estado == "SP",
          ano == 2022,
          !sub_setor %in% c("forest-land-clearing",
                             "forest-land-degradation",
@@ -294,7 +294,35 @@ dados %>%
   mutate(Cumsum = cumsum(emissao))
 ```
 
-
+```{r}
+dados %>% 
+  filter(str_detect(municipio,"Alta Floresta"),
+         estado == "MT",
+         ano == 2022,
+         !sub_setor %in% c("forest-land-clearing",
+                            "forest-land-degradation",
+                            "shrubgrass-fires",
+                            "forest-land-fires",
+                            "wetland-fires",
+                            "removals")
+         ) %>% 
+  group_by(setor,sub_setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup() %>% 
+  mutate(
+    sub_setor = sub_setor %>% fct_reorder(emissao),
+    classe = ifelse(emissao > 0,"Fonte","Sumidouro")
+  ) %>% 
+  mutate(Cumsum = cumsum(emissao)) %>% 
+  ggplot(aes(x=emissao,y=sub_setor,fill=classe)) + 
+  geom_col(color="black") +
+  theme_bw() +
+  theme(
+    legend.position = "top"
+  )
+```
 
 ```{r}
 # estados  %>%
