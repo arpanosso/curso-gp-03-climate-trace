@@ -32,8 +32,13 @@ No minicurso falaremos sobre as bases físicas das mudanças climáticas globais
  
 ### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
+![](img/ppt-pdf.png){width=10%}
 
 ### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf)
+
+
+
+[MUDANÇA DO CLIMA 2023 Relatório Síntese](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
 
 ___
 
