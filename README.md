@@ -18,7 +18,7 @@ pré-processamento e visualização de dados com o R.
 
 ## 1) Apresentações
 
-<img src="img/ppt-logo.png" style="width:10.0%" />
+<img src="img/ppt-logo.png" style="width:5.0%" />
 
 ### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao_daCosta.pdf)
 
@@ -26,8 +26,8 @@ pré-processamento e visualização de dados com o R.
 
 <img src="img/ppt-pdf.png" style="width:5.0%" />
 
-[MUDANÇA DO CLIMA 2023 Relatório
-Síntese](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
+[Mudanças do Clima - 2023 Relatório
+Síntese-pt.br](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
 
 ------------------------------------------------------------------------
 
@@ -400,7 +400,7 @@ informações podem ser integralizadas à base a partir do pacote
 
 ``` r
 dados_crus <- dados_crus %>%
-  sample_n(1020) %>% 
+  sample_n(2048) %>% 
   group_by(source_name, lon, lat) %>%
   summarise(
     emission = sum(emissions_quantity, na.rm = TRUE)/1e6,
@@ -436,7 +436,7 @@ dados_crus %>%
 
 - Remoção de Duplicatas  
 - Normalização e Padronização  
-- Tratamento de Outliers
+- Tratamento de Outliers  
 - Validação Final
 
 ------------------------------------------------------------------------
@@ -446,6 +446,8 @@ dados_crus %>%
 ``` r
 dados <- read_rds('data/emissoes_br.rds')
 ```
+
+## Emissões para o Brasil em 2022
 
 ``` r
 dados %>% 
@@ -478,6 +480,59 @@ dados %>%
 #> 7 transportation           175547963.  -24503838.
 #> 8 waste                     55688769.   31184931.
 ```
+
+``` r
+dados %>% 
+  filter(
+    ano == 2022,
+    !sub_setor %in% c("forest-land-clearing",
+                      "forest-land-degradation",
+                      "shrubgrass-fires",
+                      "forest-land-fires",
+                      "wetland-fires",
+                      "removals")
+  ) %>% 
+  group_by(setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup() %>% 
+  mutate(
+    setor = setor %>% fct_reorder(emissao)
+  ) %>% 
+  ggplot(aes(x=emissao,y=setor,fill = setor)) +
+  geom_col(color="black") +
+  theme_bw()+
+  theme(legend.position = "none") +
+  scale_fill_viridis_d()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+## Série temporal de Emissões para o Brasil em 2022, por setor
+
+``` r
+dados %>% 
+  filter(
+    ano < 2023,
+    !sub_setor %in% c("forest-land-clearing",
+                      "forest-land-degradation",
+                      "shrubgrass-fires",
+                      "forest-land-fires",
+                      "wetland-fires",
+                      "removals")
+  ) %>% 
+  group_by(ano, setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup() %>% 
+  ggplot(aes(x=ano,y=emissao,fill = setor)) +
+  geom_col(color="black") +
+  theme_bw()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
 ``` r
 dados %>% 
@@ -542,7 +597,7 @@ dados %>%
   )
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 ``` r
 # estados  %>%

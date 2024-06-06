@@ -2,6 +2,8 @@ biomes <- geobr::read_biomes(showProgress = FALSE)
 indigenous <- geobr::read_indigenous_land(showProgress = FALSE)
 estados <- geobr::read_state(showProgress = FALSE)
 conservacao <- geobr::read_conservation_units(showProgress = FALSE)
+cidades <- geobr::read_municipality(
+  showProgress = FALSE)
 states <- estados
 conservation <- conservacao
 

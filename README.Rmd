@@ -28,7 +28,7 @@ No minicurso falaremos sobre as bases físicas das mudanças climáticas globais
 
 ## 1) Apresentações
 
-![](img/ppt-logo.png){width=10%}
+![](img/ppt-logo.png){width=5%}
  
 ### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao_daCosta.pdf)
 
@@ -37,7 +37,7 @@ No minicurso falaremos sobre as bases físicas das mudanças climáticas globais
 
 ![](img/ppt-pdf.png){width=5%}
 
-[MUDANÇA DO CLIMA 2023 Relatório Síntese](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
+[Mudanças do Clima - 2023 Relatório Síntese-pt.br](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
 
 ___
 
@@ -209,7 +209,7 @@ A base do Climate TRACE não possui informações como o Estado, o Município, o
 
 ```{r}
 dados_crus <- dados_crus %>%
-  sample_n(1020) %>% 
+  sample_n(2048) %>% 
   group_by(source_name, lon, lat) %>%
   summarise(
     emission = sum(emissions_quantity, na.rm = TRUE)/1e6,
@@ -240,10 +240,10 @@ dados_crus %>%
 
 **4.7) Demais etapas:**
 
-  + Remoção de Duplicatas  
-  + Normalização e Padronização  
-  + Tratamento de Outliers
-  + Validação Final
+  + Remoção de Duplicatas    
+  + Normalização e Padronização    
+  + Tratamento de Outliers    
+  + Validação Final    
 
 ---
 
@@ -254,7 +254,7 @@ dados <- read_rds('data/emissoes_br.rds')
 ```
 
 
-
+## Emissões para o Brasil em 2022
 
 ```{r}
 dados %>% 
@@ -275,6 +275,58 @@ dados %>%
   mutate(
     Acumulada = cumsum(emissao)
   )
+```
+
+```{r}
+dados %>% 
+  filter(
+    ano == 2022,
+    !sub_setor %in% c("forest-land-clearing",
+                      "forest-land-degradation",
+                      "shrubgrass-fires",
+                      "forest-land-fires",
+                      "wetland-fires",
+                      "removals")
+  ) %>% 
+  group_by(setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup() %>% 
+  mutate(
+    setor = setor %>% fct_reorder(emissao)
+  ) %>% 
+  ggplot(aes(x=emissao,y=setor,fill = setor)) +
+  geom_col(color="black") +
+  theme_bw()+
+  theme(legend.position = "none") +
+  scale_fill_viridis_d()
+```
+
+
+## Série temporal de Emissões para o Brasil em 2022, por setor
+
+
+```{r}
+dados %>% 
+  filter(
+    ano < 2023,
+    !sub_setor %in% c("forest-land-clearing",
+                      "forest-land-degradation",
+                      "shrubgrass-fires",
+                      "forest-land-fires",
+                      "wetland-fires",
+                      "removals")
+  ) %>% 
+  group_by(ano, setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup() %>% 
+  ggplot(aes(x=ano,y=emissao,fill = setor)) +
+  geom_col(color="black") +
+  theme_bw()
+
 ```
 
 ```{r}
