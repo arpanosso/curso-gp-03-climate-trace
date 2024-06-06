@@ -131,3 +131,8 @@ download_arquivo <- function(url, dir){
   download.file(url, dir)
   return(dir)
 }
+
+brazil_ids <- read_rds("data/df_nome.rds")
+nomes_uf <- c(brazil_ids$nome_uf %>% unique(),"Brazil")
+abbrev_states <- brazil_ids$sigla_uf %>% unique()
+region_names <- brazil_ids$nome_regiao %>% unique()

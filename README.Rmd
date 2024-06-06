@@ -29,11 +29,11 @@ No minicurso falaremos sobre as bases físicas das mudanças climáticas globais
 ## 1) Apresentações
 
 ![](img/ppt-logo.png){width=10%}
- [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+ 
+### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 
-![](img/ppt-logo.png){width=10%}
- [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 ___
 
@@ -117,13 +117,17 @@ O Ciclo do Data Science.
 
 Dados de má qualidade podem levar a resultados imprecisos e análises equivocadas. Por isso, dedicar tempo ao pré-processamento assegura que as análises subsequentes sejam baseadas em informações confiáveis e precisas.
 
-**Carregar Pacotes**
+**4.1) Carregar Pacotes**
 
 ```{r}
-library(tidyverse)
+library(tidyverse) 
+library(treemapify)
+library(geobr)
+source("R/base_map.R") 
+source("R/my_function.R")
 ```
 
-**Importação dos Dados**
+**4.2) Importação dos Dados**
 
 Importe os dados para o software de análise que você está utilizando (Excel, R, Python, etc.).
 
@@ -136,58 +140,161 @@ glimpse(dados_crus)
 
 ### O qual deverá ser estruturado/faxinado para [emissoes_br.xlsx](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/data/emissoes_br.xlsx)
 
+**4.3) Correção de Inconsistências**
 
-    Correção de Inconsistências
+Verifique e corrija valores ausentes (*missing values* ou *Not Available* - NA) e inconsistências nos dados. 
 
-    Verifique e corrija valores ausentes (missing values) e inconsistências nos dados.
-    Substitua valores ausentes por uma média, mediana, ou utilize técnicas de imputação apropriadas.
+```{r}
+skimr::skim(dados_crus)
+```
 
-    Remoção de Duplicatas
+**4.4) Verificar os tipos primários**
 
-    Identifique e remova registros duplicados que possam estar presentes no conjunto de dados.
+Verifique o tipo primário das variáveis, transforme, se necessário. Por exemplo, vamos transformar as variáveis "_time" e "_date" para datas, ao invés de caracteres. 
 
-    Normalização e Padronização
+```{r}
+dados_crus <- dados_crus %>%
+  mutate(
+    start_time = as_date(start_time),
+    end_time = as_date(end_time),
+    created_date = as_date(created_date),
+    modified_date = as_date(modified_date)
+  ) 
+glimpse(dados_crus)
+```
 
-    Normalize ou padronize os dados, se necessário, para garantir que todas as variáveis estejam na mesma escala, especialmente para análises estatísticas e de machine learning.
+**4.5) Extraia informações importantes**
 
-    Conversão de Tipos de Dados
+Algumas valiosas informações estão presentes nas variáveis, por exemplo, observe a variável `directory`:
 
-    Verifique e converta tipos de dados (por exemplo, transformar strings de datas em objetos de data, transformar variáveis categóricas em fatores ou dummy variables).
+```{r}
+dados_crus$directory[1]
+```
+Ela identifica qual o caminho dentro do computador do arquivo CSV compilado em `dados_crus`. Essa coluna possui informações a respeito do setor de emissão e seu respectivo sub-setor:  
+  + Setor: "forestry_and_land_use"  
+  + Sub-setor "forest-land-fires"
 
-    Tratamento de Outliers
+Então, como estratégia, vamos criar duas novas variáveis a partir dessa variável, utilizando função para manipulação de strings.
 
-    Identifique e trate outliers que possam afetar a análise. Decida se deve removê-los ou transformá-los.
+```{r}
+dados_crus <- dados_crus %>%
+  mutate(
+    sector_name = str_split(directory,
+                            "/",
+                            simplify = TRUE)[,3],
+    sub_sector = str_split(directory,
+                           "/",
+                           simplify = TRUE)[,4],
+    sub_sector = str_remove(sub_sector,"_emissions_sources.csv|_country_emissions.csv")
+  )
+glimpse(dados_crus)
+```
 
-    Criação de Novas Variáveis (Se Necessário)
+Outro exmplo, a partir da variáveis "end_time" vamos extrair o ano para termos a referência temporal da observação.
 
-    Crie novas variáveis derivadas de outras, se necessário, para enriquecer a análise.
+```{r}
+dados_crus <- dados_crus %>% 
+  mutate(year = year(end_time))
+glimpse(dados_crus)
+```
 
-    Validação Final
 
-    Revise e valide o conjunto de dados limpo para garantir que está pronto para análise.
+**4.6) Integração entre bases de dados**
+
+A base do Climate TRACE não possui informações como o Estado, o Município, o Bioma, as Terras Indígenas e as Áreas de Conservação. Essas informações podem ser integralizadas à base a partir do pacote `{geombr}`, desenvolvido pelo IBGE.
+
+```{r}
+dados_crus <- dados_crus %>%
+  group_by(source_name, lon, lat) %>%
+  summarise(
+    emission = sum(emissions_quantity, na.rm = TRUE)/1e6,
+  ) %>%
+  mutate(
+    sigla_uf = get_geobr_state(lon,lat)
+  )
+```
+
+
+Agora é um bom momento para a visualização dos dados
+```{r}
+dados_crus %>% 
+  ggplot(aes(x=lon,y=lat)) +
+  geom_point()
+```
+
+
+Utilizando as ferramentas de filtro, podemos inspecionar os pontos por estado.
+
+```{r}
+dados_crus %>% 
+  filter(sigla_uf == "SP") %>% 
+  ggplot(aes(x=lon,y=lat)) +
+  geom_point() 
+```
+
+
+**4.7) Demais etapas:**
+
+  + Remoção de Duplicatas  
+  + Normalização e Padronização  
+  + Tratamento de Outliers
+  + Validação Final
 
 ---
 
-### Carregando os pacotes necessários
+## 5) Vizualização de dados
 
 ```{r}
-# library(tidyverse)
-# library(treemapify)
-# library(geobr)
-# source("R/base_map.R")
-# source("R/my_function.R")
+dados <- read_rds('data/emissoes_br.rds')
 ```
 
 
-```{r}
-# dados <- read_rds('data/emissoes_br.rds')
-```
 
 
 ```{r}
-# dados %>%
-#   distinct(ano)
+dados %>% 
+  filter(
+    ano == 2022,
+    !nome_fonte %in% nomes_uf,
+    !sub_setor %in% c("forest-land-clearing",
+                      "forest-land-degradation",
+                      "shrubgrass-fires",
+                      "forest-land-fires",
+                      "wetland-fires",
+                      "removals")
+  ) %>% 
+  group_by(setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup() %>% 
+  mutate(
+    Acumulada = cumsum(emissao)
+  )
 ```
+
+```{r}
+dados %>% 
+  filter(str_detect(municipio,"Ribeirão Preto"),
+         estado == "SP",
+         ano == 2022,
+         !nome_fonte %in% nomes_uf,
+         !sub_setor %in% c("forest-land-clearing",
+                            "forest-land-degradation",
+                            "shrubgrass-fires",
+                            "forest-land-fires",
+                            "wetland-fires",
+                            "removals")
+         ) %>% 
+  group_by(setor,nome_fonte,sub_setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  arrange(emissao )  %>% 
+  ungroup() %>% 
+  mutate(Cumsum = cumsum(emissao))
+```
+
 
 
 ```{r}

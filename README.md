@@ -18,12 +18,11 @@ pré-processamento e visualização de dados com o R.
 
 ## 1) Apresentações
 
-<img src="img/ppt-logo.png" style="width:10.0%" /> [Panorama das
-emissões no
-Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+<img src="img/ppt-logo.png" style="width:10.0%" />
 
-<img src="img/ppt-logo.png" style="width:10.0%" /> [Bases Físicas das
-MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+
+### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 ------------------------------------------------------------------------
 
@@ -143,13 +142,17 @@ equivocadas. Por isso, dedicar tempo ao pré-processamento assegura que
 as análises subsequentes sejam baseadas em informações confiáveis e
 precisas.
 
-**Carregar Pacotes**
+**4.1) Carregar Pacotes**
 
 ``` r
-library(tidyverse)
+library(tidyverse) 
+library(treemapify)
+library(geobr)
+source("R/base_map.R") 
+source("R/my_function.R")
 ```
 
-**Importação dos Dados**
+**4.2) Importação dos Dados**
 
 Importe os dados para o software de análise que você está utilizando
 (Excel, R, Python, etc.).
@@ -188,54 +191,324 @@ glimpse(dados_crus)
 
 ### O qual deverá ser estruturado/faxinado para [emissoes_br.xlsx](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/data/emissoes_br.xlsx)
 
-    Correção de Inconsistências
+**4.3) Correção de Inconsistências**
 
-    Verifique e corrija valores ausentes (missing values) e inconsistências nos dados.
-    Substitua valores ausentes por uma média, mediana, ou utilize técnicas de imputação apropriadas.
+Verifique e corrija valores ausentes (*missing values* ou *Not
+Available* - NA) e inconsistências nos dados.
 
-    Remoção de Duplicatas
+``` r
+skimr::skim(dados_crus)
+```
 
-    Identifique e remova registros duplicados que possam estar presentes no conjunto de dados.
+|                                                  |            |
+|:-------------------------------------------------|:-----------|
+| Name                                             | dados_crus |
+| Number of rows                                   | 100000     |
+| Number of columns                                | 23         |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |            |
+| Column type frequency:                           |            |
+| character                                        | 15         |
+| numeric                                          | 8          |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |            |
+| Group variables                                  | None       |
 
-    Normalização e Padronização
+Data summary
 
-    Normalize ou padronize os dados, se necessário, para garantir que todas as variáveis estejam na mesma escala, especialmente para análises estatísticas e de machine learning.
+**Variable type: character**
 
-    Conversão de Tipos de Dados
+| skim_variable             | n_missing | complete_rate | min | max | empty | n_unique | whitespace |
+|:--------------------------|----------:|--------------:|----:|----:|------:|---------:|-----------:|
+| source_name               |         0 |          1.00 |   0 | 117 |   217 |     8453 |          0 |
+| source_type               |     92780 |          0.07 |   0 |  38 |    42 |       43 |          0 |
+| iso3_country              |         0 |          1.00 |   3 |   3 |     0 |        1 |          0 |
+| original_inventory_sector |     62219 |          0.38 |   5 |  36 |     0 |       27 |          0 |
+| start_time                |         0 |          1.00 |  19 |  19 |     0 |     6708 |          0 |
+| end_time                  |         0 |          1.00 |  19 |  19 |     0 |     6740 |          0 |
+| geometry_ref              |         8 |          1.00 |   8 |  46 |     0 |     8683 |          0 |
+| gas                       |         0 |          1.00 |   3 |  10 |     0 |        5 |          0 |
+| temporal_granularity      |         0 |          1.00 |   3 |   6 |     0 |        5 |          0 |
+| created_date              |         0 |          1.00 |  19 |  19 |     0 |      473 |          0 |
+| modified_date             |     30289 |          0.70 |   0 |  26 | 11982 |     2887 |          0 |
+| directory                 |         0 |          1.00 |  54 |  94 |     0 |       36 |          0 |
+| activity_units            |     33096 |          0.67 |   3 |  31 |     0 |       22 |          0 |
+| emissions_factor_units    |     33090 |          0.67 |   0 |  44 | 42114 |       40 |          0 |
+| capacity_units            |     47644 |          0.52 |   2 |  58 |     0 |       14 |          0 |
 
-    Verifique e converta tipos de dados (por exemplo, transformar strings de datas em objetos de data, transformar variáveis categóricas em fatores ou dummy variables).
+**Variable type: numeric**
 
-    Tratamento de Outliers
+| skim_variable      | n_missing | complete_rate |        mean |           sd |            p0 |        p25 |        p50 |         p75 |          p100 | hist  |
+|:-------------------|----------:|--------------:|------------:|-------------:|--------------:|-----------:|-----------:|------------:|--------------:|:------|
+| source_id          |         0 |          1.00 | 10272375.22 | 6.692248e+06 |  6.142400e+04 | 5017306.75 | 8180875.50 | 13166885.00 |  3.070776e+07 | ▇▇▂▃▁ |
+| lat                |         8 |          1.00 |      -16.45 | 8.380000e+00 | -3.365000e+01 |     -22.94 |     -18.40 |       -8.46 |  4.680000e+00 | ▃▇▅▆▁ |
+| lon                |         8 |          1.00 |      -46.24 | 6.450000e+00 | -7.344000e+01 |     -50.84 |     -46.53 |      -41.24 | -2.932000e+01 | ▁▁▇▇▂ |
+| emissions_quantity |     33869 |          0.66 |   -21812.98 | 6.386586e+06 | -1.254345e+09 |       0.00 |     278.03 |     6023.43 |  2.656355e+08 | ▁▁▁▁▇ |
+| activity           |     34379 |          0.66 |  2975670.33 | 7.380231e+07 |  0.000000e+00 |     246.67 |    2952.46 |    17022.76 |  8.604243e+09 | ▇▁▁▁▁ |
+| emissions_factor   |     77666 |          0.22 |       32.71 | 1.025050e+03 |  0.000000e+00 |       0.00 |       0.00 |        0.23 |  1.523900e+05 | ▇▁▁▁▁ |
+| capacity           |     34540 |          0.65 | 43432815.06 | 1.815366e+09 |  0.000000e+00 |    9666.33 |  578777.37 |  2720854.67 |  2.248459e+11 | ▇▁▁▁▁ |
+| capacity_factor    |     44035 |          0.56 |        7.54 | 1.550300e+02 |  0.000000e+00 |       0.00 |       0.01 |        0.01 |  2.409000e+04 | ▇▁▁▁▁ |
 
-    Identifique e trate outliers que possam afetar a análise. Decida se deve removê-los ou transformá-los.
+**4.4) Verificar os tipos primários**
 
-    Criação de Novas Variáveis (Se Necessário)
+Verifique o tipo primário das variáveis, transforme, se necessário. Por
+exemplo, vamos transformar as variáveis “\_time” e “\_date” para datas,
+ao invés de caracteres.
 
-    Crie novas variáveis derivadas de outras, se necessário, para enriquecer a análise.
+``` r
+dados_crus <- dados_crus %>%
+  mutate(
+    start_time = as_date(start_time),
+    end_time = as_date(end_time),
+    created_date = as_date(created_date),
+    modified_date = as_date(modified_date)
+  ) 
+glimpse(dados_crus)
+#> Rows: 100,000
+#> Columns: 23
+#> $ source_id                 <int> 8173502, 4580584, 20404729, 4530293, 9289668…
+#> $ source_name               <chr> "Campo do Tenente", "Matriz de Camaragibe", …
+#> $ source_type               <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+#> $ iso3_country              <chr> "BRA", "BRA", "BRA", "BRA", "BRA", "BRA", "B…
+#> $ original_inventory_sector <chr> NA, NA, "manure-left-on-pasture-cattle", NA,…
+#> $ start_time                <date> 2021-01-01, 2022-01-01, 2020-01-01, 2015-01…
+#> $ end_time                  <date> 2021-12-31, 2022-12-31, 2020-12-31, 2015-12…
+#> $ lat                       <dbl> -25.977848, -9.104498, -29.362905, -16.62071…
+#> $ lon                       <dbl> -49.65640, -35.58160, -51.30492, -43.92882, …
+#> $ geometry_ref              <chr> "gadm_BRA.16.59_2", "gadm_BRA.2.55_2", "gadm…
+#> $ gas                       <chr> "co2", "ch4", "co2e_100yr", "co2e_100yr", "c…
+#> $ emissions_quantity        <dbl> 2587.14882, NA, 105.21137, 89.00585, 0.00000…
+#> $ temporal_granularity      <chr> "annual", "annual", "annual", "annual", "ann…
+#> $ created_date              <date> 2023-09-29, 2023-09-29, 2023-10-18, 2023-09…
+#> $ modified_date             <date> 2024-02-26, NA, 2023-11-15, 2024-01-11, NA,…
+#> $ directory                 <chr> "data-raw/BRA/forestry_and_land_use/forest-l…
+#> $ activity                  <dbl> 7354.740884, NA, 239.978673, 231.431143, 3.8…
+#> $ activity_units            <chr> "Total Living biomass burned", NA, "animals"…
+#> $ emissions_factor          <dbl> 3.517661e-01, NA, 1.506299e-03, NA, NA, 1.26…
+#> $ emissions_factor_units    <chr> "unitless emission efficiency factor", NA, "…
+#> $ capacity                  <dbl> 4020983.226, NA, 29569.152, 46720.959, 71557…
+#> $ capacity_units            <chr> "Total live biomass carbon from annual carbo…
+#> $ capacity_factor           <dbl> 1.829090e-03, NA, 8.115846e-03, 4.953476e-03…
+```
 
-    Validação Final
+**4.5) Extraia informações importantes**
 
-    Revise e valide o conjunto de dados limpo para garantir que está pronto para análise.
+Algumas valiosas informações estão presentes nas variáveis, por exemplo,
+observe a variável `directory`:
+
+``` r
+dados_crus$directory[1]
+#> [1] "data-raw/BRA/forestry_and_land_use/forest-land-fires_emissions_sources.csv"
+```
+
+Ela identifica qual o caminho dentro do computador do arquivo CSV
+compilado em `dados_crus`. Essa coluna possui informações a respeito do
+setor de emissão e seu respectivo sub-setor:  
++ Setor: “forestry_and_land_use”  
++ Sub-setor “forest-land-fires”
+
+Então, como estratégia, vamos criar duas novas variáveis a partir dessa
+variável, utilizando função para manipulação de strings.
+
+``` r
+dados_crus <- dados_crus %>%
+  mutate(
+    sector_name = str_split(directory,
+                            "/",
+                            simplify = TRUE)[,3],
+    sub_sector = str_split(directory,
+                           "/",
+                           simplify = TRUE)[,4],
+    sub_sector = str_remove(sub_sector,"_emissions_sources.csv|_country_emissions.csv")
+  )
+glimpse(dados_crus)
+#> Rows: 100,000
+#> Columns: 25
+#> $ source_id                 <int> 8173502, 4580584, 20404729, 4530293, 9289668…
+#> $ source_name               <chr> "Campo do Tenente", "Matriz de Camaragibe", …
+#> $ source_type               <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+#> $ iso3_country              <chr> "BRA", "BRA", "BRA", "BRA", "BRA", "BRA", "B…
+#> $ original_inventory_sector <chr> NA, NA, "manure-left-on-pasture-cattle", NA,…
+#> $ start_time                <date> 2021-01-01, 2022-01-01, 2020-01-01, 2015-01…
+#> $ end_time                  <date> 2021-12-31, 2022-12-31, 2020-12-31, 2015-12…
+#> $ lat                       <dbl> -25.977848, -9.104498, -29.362905, -16.62071…
+#> $ lon                       <dbl> -49.65640, -35.58160, -51.30492, -43.92882, …
+#> $ geometry_ref              <chr> "gadm_BRA.16.59_2", "gadm_BRA.2.55_2", "gadm…
+#> $ gas                       <chr> "co2", "ch4", "co2e_100yr", "co2e_100yr", "c…
+#> $ emissions_quantity        <dbl> 2587.14882, NA, 105.21137, 89.00585, 0.00000…
+#> $ temporal_granularity      <chr> "annual", "annual", "annual", "annual", "ann…
+#> $ created_date              <date> 2023-09-29, 2023-09-29, 2023-10-18, 2023-09…
+#> $ modified_date             <date> 2024-02-26, NA, 2023-11-15, 2024-01-11, NA,…
+#> $ directory                 <chr> "data-raw/BRA/forestry_and_land_use/forest-l…
+#> $ activity                  <dbl> 7354.740884, NA, 239.978673, 231.431143, 3.8…
+#> $ activity_units            <chr> "Total Living biomass burned", NA, "animals"…
+#> $ emissions_factor          <dbl> 3.517661e-01, NA, 1.506299e-03, NA, NA, 1.26…
+#> $ emissions_factor_units    <chr> "unitless emission efficiency factor", NA, "…
+#> $ capacity                  <dbl> 4020983.226, NA, 29569.152, 46720.959, 71557…
+#> $ capacity_units            <chr> "Total live biomass carbon from annual carbo…
+#> $ capacity_factor           <dbl> 1.829090e-03, NA, 8.115846e-03, 4.953476e-03…
+#> $ sector_name               <chr> "forestry_and_land_use", "forestry_and_land_…
+#> $ sub_sector                <chr> "forest-land-fires", "net-shrubgrass", "manu…
+```
+
+Outro exmplo, a partir da variáveis “end_time” vamos extrair o ano para
+termos a referência temporal da observação.
+
+``` r
+dados_crus <- dados_crus %>% 
+  mutate(year = year(end_time))
+glimpse(dados_crus)
+#> Rows: 100,000
+#> Columns: 26
+#> $ source_id                 <int> 8173502, 4580584, 20404729, 4530293, 9289668…
+#> $ source_name               <chr> "Campo do Tenente", "Matriz de Camaragibe", …
+#> $ source_type               <chr> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+#> $ iso3_country              <chr> "BRA", "BRA", "BRA", "BRA", "BRA", "BRA", "B…
+#> $ original_inventory_sector <chr> NA, NA, "manure-left-on-pasture-cattle", NA,…
+#> $ start_time                <date> 2021-01-01, 2022-01-01, 2020-01-01, 2015-01…
+#> $ end_time                  <date> 2021-12-31, 2022-12-31, 2020-12-31, 2015-12…
+#> $ lat                       <dbl> -25.977848, -9.104498, -29.362905, -16.62071…
+#> $ lon                       <dbl> -49.65640, -35.58160, -51.30492, -43.92882, …
+#> $ geometry_ref              <chr> "gadm_BRA.16.59_2", "gadm_BRA.2.55_2", "gadm…
+#> $ gas                       <chr> "co2", "ch4", "co2e_100yr", "co2e_100yr", "c…
+#> $ emissions_quantity        <dbl> 2587.14882, NA, 105.21137, 89.00585, 0.00000…
+#> $ temporal_granularity      <chr> "annual", "annual", "annual", "annual", "ann…
+#> $ created_date              <date> 2023-09-29, 2023-09-29, 2023-10-18, 2023-09…
+#> $ modified_date             <date> 2024-02-26, NA, 2023-11-15, 2024-01-11, NA,…
+#> $ directory                 <chr> "data-raw/BRA/forestry_and_land_use/forest-l…
+#> $ activity                  <dbl> 7354.740884, NA, 239.978673, 231.431143, 3.8…
+#> $ activity_units            <chr> "Total Living biomass burned", NA, "animals"…
+#> $ emissions_factor          <dbl> 3.517661e-01, NA, 1.506299e-03, NA, NA, 1.26…
+#> $ emissions_factor_units    <chr> "unitless emission efficiency factor", NA, "…
+#> $ capacity                  <dbl> 4020983.226, NA, 29569.152, 46720.959, 71557…
+#> $ capacity_units            <chr> "Total live biomass carbon from annual carbo…
+#> $ capacity_factor           <dbl> 1.829090e-03, NA, 8.115846e-03, 4.953476e-03…
+#> $ sector_name               <chr> "forestry_and_land_use", "forestry_and_land_…
+#> $ sub_sector                <chr> "forest-land-fires", "net-shrubgrass", "manu…
+#> $ year                      <dbl> 2021, 2022, 2020, 2015, 2021, 2019, 2017, 20…
+```
+
+**4.6) Integração entre bases de dados**
+
+A base do Climate TRACE não possui informações como o Estado, o
+Município, o Bioma, as Terras Indígenas e as Áreas de Conservação. Essas
+informações podem ser integralizadas à base a partir do pacote
+`{geombr}`, desenvolvido pelo IBGE.
+
+``` r
+dados_crus <- dados_crus %>%
+  group_by(source_name, lon, lat) %>%
+  summarise(
+    emission = sum(emissions_quantity, na.rm = TRUE)/1e6,
+  ) %>%
+  mutate(
+    sigla_uf = get_geobr_state(lon,lat)
+  )
+```
+
+Agora é um bom momento para a visualização dos dados
+
+``` r
+dados_crus %>% 
+  ggplot(aes(x=lon,y=lat)) +
+  geom_point()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+Utilizando as ferramentas de filtro, podemos inspecionar os pontos por
+estado.
+
+``` r
+dados_crus %>% 
+  filter(sigla_uf == "SP") %>% 
+  ggplot(aes(x=lon,y=lat)) +
+  geom_point() 
+```
+
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+**4.7) Demais etapas:**
+
+- Remoção de Duplicatas  
+- Normalização e Padronização  
+- Tratamento de Outliers
+- Validação Final
 
 ------------------------------------------------------------------------
 
-### Carregando os pacotes necessários
+## 5) Vizualização de dados
 
 ``` r
-# library(tidyverse)
-# library(treemapify)
-# library(geobr)
-# source("R/base_map.R")
-# source("R/my_function.R")
+dados <- read_rds('data/emissoes_br.rds')
 ```
 
 ``` r
-# dados <- read_rds('data/emissoes_br.rds')
+dados %>% 
+  filter(
+    ano == 2022,
+    !nome_fonte %in% nomes_uf,
+    !sub_setor %in% c("forest-land-clearing",
+                      "forest-land-degradation",
+                      "shrubgrass-fires",
+                      "forest-land-fires",
+                      "wetland-fires",
+                      "removals")
+  ) %>% 
+  group_by(setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup() %>% 
+  mutate(
+    Acumulada = cumsum(emissao)
+  )
+#> # A tibble: 8 × 3
+#>   setor                       emissao   Acumulada
+#>   <chr>                         <dbl>       <dbl>
+#> 1 agriculture              622263753.  622263753.
+#> 2 forestry_and_land_use  -1069945057. -447681304.
+#> 3 fossil_fuel_operations    92340743. -355340561.
+#> 4 manufacturing             95008049  -260332512.
+#> 5 mineral_extraction        14773711  -245558801.
+#> 6 power                     45507000  -200051801.
+#> 7 transportation           175547963.  -24503838.
+#> 8 waste                     55688769.   31184931.
 ```
 
 ``` r
-# dados %>%
-#   distinct(ano)
+dados %>% 
+  filter(str_detect(municipio,"Ribeirão Preto"),
+         estado == "SP",
+         ano == 2022,
+         !nome_fonte %in% nomes_uf,
+         !sub_setor %in% c("forest-land-clearing",
+                            "forest-land-degradation",
+                            "shrubgrass-fires",
+                            "forest-land-fires",
+                            "wetland-fires",
+                            "removals")
+         ) %>% 
+  group_by(setor,nome_fonte,sub_setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  arrange(emissao )  %>% 
+  ungroup() %>% 
+  mutate(Cumsum = cumsum(emissao))
+#> # A tibble: 12 × 5
+#>    setor                 nome_fonte                    sub_setor emissao  Cumsum
+#>    <chr>                 <chr>                         <chr>       <dbl>   <dbl>
+#>  1 forestry_and_land_use Ribeirão Preto                net-fore… -22778. -2.28e4
+#>  2 forestry_and_land_use Ribeirão Preto                net-wetl…   -551. -2.33e4
+#>  3 forestry_and_land_use Ribeirão Preto                net-shru…   -242. -2.36e4
+#>  4 transportation        Leite Lopes Airport           internat…      0  -2.36e4
+#>  5 agriculture           Ribeirão Preto                manure-l…   1437. -2.21e4
+#>  6 agriculture           Ribeirão Preto                enteric-…   4993. -1.71e4
+#>  7 waste                 ETE CAICARA   RIBEIRAO PRETO  wastewat…   5667. -1.15e4
+#>  8 agriculture           Ribeirão Preto                syntheti…   7247. -4.23e3
+#>  9 transportation        Leite Lopes Airport           domestic…  35392.  3.12e4
+#> 10 waste                 ETE RIBEIRAO                  wastewat…  36592.  6.78e4
+#> 11 transportation        Ribeirao Preto Urban Area in… road-tra… 767421.  8.35e5
+#> 12 agriculture           Ribeirão Preto                cropland… 809774.  1.64e6
 ```
 
 ``` r
