@@ -30,7 +30,7 @@ No minicurso falaremos sobre as bases físicas das mudanças climáticas globais
 
 ![](img/ppt-logo.png){width=10%}
  
-### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao_daCosta.pdf)
 
 ![](img/ppt-pdf.png){width=10%}
 
