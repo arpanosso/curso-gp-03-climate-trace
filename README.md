@@ -22,7 +22,7 @@ pré-processamento e visualização de dados com o R.
 
 ### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
-### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf)
 
 ------------------------------------------------------------------------
 
@@ -395,6 +395,7 @@ informações podem ser integralizadas à base a partir do pacote
 
 ``` r
 dados_crus <- dados_crus %>%
+  sample_n(1020) %>% 
   group_by(source_name, lon, lat) %>%
   summarise(
     emission = sum(emissions_quantity, na.rm = TRUE)/1e6,
@@ -445,7 +446,6 @@ dados <- read_rds('data/emissoes_br.rds')
 dados %>% 
   filter(
     ano == 2022,
-    !nome_fonte %in% nomes_uf,
     !sub_setor %in% c("forest-land-clearing",
                       "forest-land-degradation",
                       "shrubgrass-fires",
@@ -476,10 +476,9 @@ dados %>%
 
 ``` r
 dados %>% 
-  filter(str_detect(municipio,"Ribeirão Preto"),
-         estado == "SP",
+  filter(str_detect(municipio,"Dourados"),
+         estado == "MS",
          ano == 2022,
-         !nome_fonte %in% nomes_uf,
          !sub_setor %in% c("forest-land-clearing",
                             "forest-land-degradation",
                             "shrubgrass-fires",
@@ -494,21 +493,20 @@ dados %>%
   arrange(emissao )  %>% 
   ungroup() %>% 
   mutate(Cumsum = cumsum(emissao))
-#> # A tibble: 12 × 5
-#>    setor                 nome_fonte                    sub_setor emissao  Cumsum
-#>    <chr>                 <chr>                         <chr>       <dbl>   <dbl>
-#>  1 forestry_and_land_use Ribeirão Preto                net-fore… -22778. -2.28e4
-#>  2 forestry_and_land_use Ribeirão Preto                net-wetl…   -551. -2.33e4
-#>  3 forestry_and_land_use Ribeirão Preto                net-shru…   -242. -2.36e4
-#>  4 transportation        Leite Lopes Airport           internat…      0  -2.36e4
-#>  5 agriculture           Ribeirão Preto                manure-l…   1437. -2.21e4
-#>  6 agriculture           Ribeirão Preto                enteric-…   4993. -1.71e4
-#>  7 waste                 ETE CAICARA   RIBEIRAO PRETO  wastewat…   5667. -1.15e4
-#>  8 agriculture           Ribeirão Preto                syntheti…   7247. -4.23e3
-#>  9 transportation        Leite Lopes Airport           domestic…  35392.  3.12e4
-#> 10 waste                 ETE RIBEIRAO                  wastewat…  36592.  6.78e4
-#> 11 transportation        Ribeirao Preto Urban Area in… road-tra… 767421.  8.35e5
-#> 12 agriculture           Ribeirão Preto                cropland… 809774.  1.64e6
+#> # A tibble: 23 × 5
+#>    setor                 nome_fonte              sub_setor       emissao  Cumsum
+#>    <chr>                 <chr>                   <chr>             <dbl>   <dbl>
+#>  1 forestry_and_land_use Glória de Dourados      net-shrubgrass  -8.37e4 -83726.
+#>  2 forestry_and_land_use Glória de Dourados      net-forest-land -1.44e4 -98086.
+#>  3 forestry_and_land_use Glória de Dourados      net-wetland     -4.64e1 -98132.
+#>  4 transportation        Dourados Airport        domestic-aviat…  0      -98132.
+#>  5 transportation        Dourados Airport        international-…  0      -98132.
+#>  6 waste                 ETE HARRY AMORIM        wastewater-tre…  3.00e1 -98102.
+#>  7 waste                 ETE LARANJA DOCE        wastewater-tre…  6.96e2 -97407.
+#>  8 waste                 ETE IPE   DOURADOS      wastewater-tre…  1.43e3 -95974.
+#>  9 waste                 ETE AGUA BOA   DOURADOS wastewater-tre…  2.43e3 -93549.
+#> 10 waste                 ETE GUAXINIM            wastewater-tre…  2.46e3 -91087.
+#> # ℹ 13 more rows
 ```
 
 ``` r

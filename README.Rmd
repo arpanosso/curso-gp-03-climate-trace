@@ -33,7 +33,7 @@ No minicurso falaremos sobre as bases físicas das mudanças climáticas globais
 ### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 
-### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf)
 
 ___
 
@@ -205,6 +205,7 @@ A base do Climate TRACE não possui informações como o Estado, o Município, o
 
 ```{r}
 dados_crus <- dados_crus %>%
+  sample_n(1020) %>% 
   group_by(source_name, lon, lat) %>%
   summarise(
     emission = sum(emissions_quantity, na.rm = TRUE)/1e6,
@@ -255,7 +256,6 @@ dados <- read_rds('data/emissoes_br.rds')
 dados %>% 
   filter(
     ano == 2022,
-    !nome_fonte %in% nomes_uf,
     !sub_setor %in% c("forest-land-clearing",
                       "forest-land-degradation",
                       "shrubgrass-fires",
@@ -275,10 +275,9 @@ dados %>%
 
 ```{r}
 dados %>% 
-  filter(str_detect(municipio,"Ribeirão Preto"),
-         estado == "SP",
+  filter(str_detect(municipio,"Dourados"),
+         estado == "MS",
          ano == 2022,
-         !nome_fonte %in% nomes_uf,
          !sub_setor %in% c("forest-land-clearing",
                             "forest-land-degradation",
                             "shrubgrass-fires",
