@@ -1,0 +1,166 @@
+---
+title: "Semana do Meio Ambiente"
+date: "07/07/2024"
+output: html_document
+---
+
+## Vizualização de dados
+
+### Carregando pacotes
+```{r}
+library(tidyverse) 
+library(treemapify)
+library(geobr)
+source("R/base_map.R") 
+source("R/my_function.R")
+```
+
+### Carregando a base
+
+```{r}
+dados <- read_rds('data/emissoes_br.rds')
+```
+
+
+## Emissões para o Brasil em 2022
+
+```{r}
+dados %>% 
+  filter(
+    ano == 2022,
+    !sub_setor %in% c("forest-land-clearing",
+                      "forest-land-degradation",
+                      "shrubgrass-fires",
+                      "forest-land-fires",
+                      "wetland-fires",
+                      "removals")
+  ) %>% 
+  group_by(setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup()
+```
+
+```{r}
+dados %>% 
+  filter(
+    ano == 2022,
+    !sub_setor %in% c("forest-land-clearing",
+                      "forest-land-degradation",
+                      "shrubgrass-fires",
+                      "forest-land-fires",
+                      "wetland-fires",
+                      "removals")
+  ) %>% 
+  group_by(setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup() %>% 
+  mutate(
+    setor = setor %>% fct_reorder(emissao)
+  ) %>% 
+  ggplot(aes(x=emissao,y=setor,fill = setor)) +
+  geom_col(color="black") +
+  theme_bw()+
+  theme(legend.position = "none") +
+  scale_fill_viridis_d()
+```
+
+
+## Série temporal de Emissões para o Brasil em 2022, por setor
+
+```{r}
+dados %>% 
+  filter(
+    ano < 2023,
+    !sub_setor %in% c("forest-land-clearing",
+                      "forest-land-degradation",
+                      "shrubgrass-fires",
+                      "forest-land-fires",
+                      "wetland-fires",
+                      "removals")
+  ) %>% 
+  group_by(ano, setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  ungroup() %>% 
+  ggplot(aes(x=ano,y=emissao,fill = setor)) +
+  geom_col(color="black") +
+  theme_bw()
+
+```
+
+### Emissões para um munícipio:
+
+```{r}
+dados %>% 
+  filter(str_detect(municipio,"Jaboticabal"),
+         estado == "SP",
+         ano == 2022,
+         !sub_setor %in% c("forest-land-clearing",
+                            "forest-land-degradation",
+                            "shrubgrass-fires",
+                            "forest-land-fires",
+                            "wetland-fires",
+                            "removals")
+         ) %>% 
+  group_by(setor,nome_fonte,sub_setor) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  arrange(emissao )  %>% 
+  ungroup() %>% 
+  mutate(Cumsum = cumsum(emissao)) %>% 
+  select(sub_setor, emissao)
+```
+
+Vamos plotar um estado
+
+```{r}
+meu_estado <- "SP"
+cidades %>%  
+  filter(abbrev_state == meu_estado) %>% 
+    ggplot()  +
+  geom_sf(fill="white", color="black",
+          size=.15, show.legend = FALSE) +
+  geom_point(
+    data = dados %>%
+      filter(
+        ano == 2022,
+        estado == meu_estado),
+    aes(lon,lat,color = bioma))
+```
+
+Melhrando os resultados
+
+```{r}
+meu_estado <- "SP"
+cidades %>%
+  filter(abbrev_state == meu_estado) %>% 
+  inner_join(dados %>%
+               filter(
+                 ano == 2022,
+                 estado == meu_estado,
+                 !sub_setor %in% c("forest-land-clearing",
+                                   "forest-land-degradation",
+                                   "shrubgrass-fires",
+                                   "forest-land-fires",
+                                   "wetland-fires",
+                                   "removals")) %>% 
+               group_by(municipio) %>% 
+               summarise(
+                 emissao = sum(emissao, na.rm=TRUE)
+               ) %>% 
+             rename(name_muni = municipio),
+             by="name_muni") %>% 
+  mutate(
+    classe_emissao = if_else(emissao < 0,"sumidouro","fonte")
+    ) %>% 
+  ggplot() +
+  geom_sf(aes(fill=classe_emissao), color="black",
+          size=.15, show.legend = TRUE)  +
+  scale_fill_manual(values = c("red","lightblue")) 
+```
