@@ -4,6 +4,14 @@ date: "07/07/2024"
 output: html_document
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, warning = FALSE,
+  error = FALSE, message = FALSE,
+  comment = "#>"
+)
+```
+
 ## Vizualização de dados
 
 ### Carregando pacotes
@@ -164,3 +172,39 @@ cidades %>%
           size=.15, show.legend = TRUE)  +
   scale_fill_manual(values = c("red","lightblue")) 
 ```
+
+### Identificar qual a principal fonte no município.
+```{r}
+meu_estado <- "SP"
+cidades %>%
+  filter(abbrev_state == meu_estado) %>% 
+  inner_join(dados %>%
+               filter(
+                 ano == 2022,
+                 estado == meu_estado,
+                 !sub_setor %in% c("forest-land-clearing",
+                                   "forest-land-degradation",
+                                   "shrubgrass-fires",
+                                   "forest-land-fires",
+                                   "wetland-fires",
+                                   "removals")) %>% 
+               group_by(municipio,setor) %>% 
+               summarise(
+                 emissao = sum(emissao, na.rm=TRUE)
+               ) %>% 
+               nest() %>% 
+               mutate(
+                 setor_max = map(data,max_sector_find)
+               ) %>% 
+               select(municipio, setor_max) %>% 
+               ungroup() %>% 
+               unnest() %>% 
+             rename(name_muni = municipio),
+             by="name_muni") %>% 
+  ggplot() +
+  geom_sf(aes(fill=setor_max), color="black",
+          size=.15, show.legend = TRUE) +
+  scale_fill_brewer(palette = "Set1") +
+  theme_bw()
+```
+

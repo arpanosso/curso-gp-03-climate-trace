@@ -138,3 +138,15 @@ brazil_ids <- read_rds("data/df_nome.rds")
 nomes_uf <- c(brazil_ids$nome_uf %>% unique(),"Brazil")
 abbrev_states <- brazil_ids$sigla_uf %>% unique()
 region_names <- brazil_ids$nome_regiao %>% unique()
+
+max_sector_find <- function(df){
+  sn <- df %>% pull(setor)
+  em <- df %>% pull(emissao)
+  re <- sn[which.max(em)]
+  return(re)
+}
+
+
+cores <- c("#00A087FF", "#4DBBD5FF", "#E64B35FF", "#3C5488FF",
+           "#F39B7FFF", "#8491B4FF",
+           "#91D1C2FF", "#DC0000FF", "#7E6148FF", "#B09C85FF")
