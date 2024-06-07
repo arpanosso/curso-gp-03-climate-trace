@@ -77,7 +77,7 @@ dados %>%
 ```
 
 
-## Série temporal de Emissões para o Brasil em 2022, por setor
+## Série temporal das Emissões para o Brasil, por setor
 
 ```{r}
 dados %>% 
@@ -101,7 +101,7 @@ dados %>%
 
 ```
 
-### Emissões para um munícipio:
+### Emissões para um munícipio específico, não se esqueça de modificar o estado também:
 
 ```{r}
 dados %>% 
@@ -125,7 +125,7 @@ dados %>%
   select(sub_setor, emissao)
 ```
 
-Vamos plotar um estado
+Vamos plotar um estado todo, usaremos a informação sobre o Bioma
 
 ```{r}
 meu_estado <- "SP"
@@ -142,15 +142,16 @@ cidades %>%
     aes(lon,lat,color = bioma))
 ```
 
-Melhrando os resultados
+Melhorando a apresentação dos resultados. Atribuindo uma classificação para o balanço (total de emissões).
 
 ```{r}
 meu_estado <- "SP"
+meu_ano <- 2022
 cidades %>%
   filter(abbrev_state == meu_estado) %>% 
   inner_join(dados %>%
                filter(
-                 ano == 2022,
+                 ano == meu_ano,
                  estado == meu_estado,
                  !sub_setor %in% c("forest-land-clearing",
                                    "forest-land-degradation",
@@ -170,10 +171,51 @@ cidades %>%
   ggplot() +
   geom_sf(aes(fill=classe_emissao), color="black",
           size=.15, show.legend = TRUE)  +
-  scale_fill_manual(values = c("red","lightblue")) 
+  scale_fill_manual(values = c("red","lightblue")) +
+  theme_bw()+
+  theme(legend.position = "top") +
+  labs(fill="")
 ```
 
-### Identificar qual a principal fonte no município.
+
+### Quais foram os principais municípios emissores/captadores.
+
+```{r}
+dados %>%
+  filter(
+    ano == meu_ano,
+    estado == meu_estado,
+    !sub_setor %in% c("forest-land-clearing",
+                      "forest-land-degradation",
+                      "shrubgrass-fires",
+                      "forest-land-fires",
+                      "wetland-fires",
+                      "removals")) %>% 
+  group_by(municipio) %>% 
+  summarise(
+    emissao = sum(emissao, na.rm=TRUE)
+  ) %>% 
+  rename(name_muni = municipio) %>% 
+  ungroup() %>%
+  mutate(
+    classe_emissao = if_else(emissao < 0,"sumidouro","fonte")
+  ) %>% 
+  filter(emissao > quantile(emissao,.99) | emissao < quantile(emissao,.01)) %>%
+  mutate(
+    name_muni = name_muni %>% fct_reorder(emissao)
+  )  %>%
+  ggplot(aes(x=name_muni, y= emissao, fill=classe_emissao))+
+  geom_col(color="black") +
+  coord_flip() +
+  theme_bw() +
+  labs(fill="") +
+  scale_fill_manual(values = c("red","lightblue")) + 
+  theme(legend.position = "top")
+
+```
+
+
+### Identificar qual a principal fonte no município do estado.
 ```{r}
 meu_estado <- "SP"
 cidades %>%
@@ -205,6 +247,9 @@ cidades %>%
   geom_sf(aes(fill=setor_max), color="black",
           size=.15, show.legend = TRUE) +
   scale_fill_brewer(palette = "Set1") +
-  theme_bw()
+  theme_bw()+
+  labs(fill="")
 ```
+
+
 
