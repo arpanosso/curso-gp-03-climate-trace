@@ -1,18 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-![](img/logo01.png)
+![](img/FUNEP00153-Banner-1536x416.png)
 
-<img src="img/todos.png" width="100%" style="display: block; margin: auto auto auto 0;" />
+<img src="img/luis-alan.png" width="100%" style="display: block; margin: auto auto auto 0;" />
 
-# Introdução às Mudanças Climáticas Globais: Monitoramento de Emissões e Capturas de Gases do Efeito Estufa
+# Introdução às mudanças climáticas globais, impactos,
+
+adaptações e mitigação
 
 No minicurso falaremos sobre as bases físicas das mudanças climáticas
 globais, impactos, adaptações e necessidades de mitigação. Exploraremos
 também a plataforma [Climate TRACE](https://climatetrace.org/) para
 monitoramento de emissões de gases do efeito estufa em nível nacional.
 Além disso, haverá uma atividade prática com aquisição de dados,
-pré-processamento e visualização de dados com o R.
+pré-processamento e visualização de dados com o $R$.
 
 ------------------------------------------------------------------------
 
@@ -20,7 +22,7 @@ pré-processamento e visualização de dados com o R.
 
 <img src="img/ppt-logo.png" style="width:5.0%" />
 
-### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao_daCosta.pdf)
+### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao_daCosta-2025.pdf)
 
 ### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf)
 
@@ -221,36 +223,36 @@ Data summary
 
 **Variable type: character**
 
-| skim_variable             | n_missing | complete_rate | min | max | empty | n_unique | whitespace |
-|:--------------------------|----------:|--------------:|----:|----:|------:|---------:|-----------:|
-| source_name               |         0 |          1.00 |   0 | 117 |   217 |     8453 |          0 |
-| source_type               |     92780 |          0.07 |   0 |  38 |    42 |       43 |          0 |
-| iso3_country              |         0 |          1.00 |   3 |   3 |     0 |        1 |          0 |
-| original_inventory_sector |     62219 |          0.38 |   5 |  36 |     0 |       27 |          0 |
-| start_time                |         0 |          1.00 |  19 |  19 |     0 |     6708 |          0 |
-| end_time                  |         0 |          1.00 |  19 |  19 |     0 |     6740 |          0 |
-| geometry_ref              |         8 |          1.00 |   8 |  46 |     0 |     8683 |          0 |
-| gas                       |         0 |          1.00 |   3 |  10 |     0 |        5 |          0 |
-| temporal_granularity      |         0 |          1.00 |   3 |   6 |     0 |        5 |          0 |
-| created_date              |         0 |          1.00 |  19 |  19 |     0 |      473 |          0 |
-| modified_date             |     30289 |          0.70 |   0 |  26 | 11982 |     2887 |          0 |
-| directory                 |         0 |          1.00 |  54 |  94 |     0 |       36 |          0 |
-| activity_units            |     33096 |          0.67 |   3 |  31 |     0 |       22 |          0 |
-| emissions_factor_units    |     33090 |          0.67 |   0 |  44 | 42114 |       40 |          0 |
-| capacity_units            |     47644 |          0.52 |   2 |  58 |     0 |       14 |          0 |
+| skim_variable | n_missing | complete_rate | min | max | empty | n_unique | whitespace |
+|:---|---:|---:|---:|---:|---:|---:|---:|
+| source_name | 0 | 1.00 | 0 | 117 | 217 | 8453 | 0 |
+| source_type | 92780 | 0.07 | 0 | 38 | 42 | 43 | 0 |
+| iso3_country | 0 | 1.00 | 3 | 3 | 0 | 1 | 0 |
+| original_inventory_sector | 62219 | 0.38 | 5 | 36 | 0 | 27 | 0 |
+| start_time | 0 | 1.00 | 19 | 19 | 0 | 6708 | 0 |
+| end_time | 0 | 1.00 | 19 | 19 | 0 | 6740 | 0 |
+| geometry_ref | 8 | 1.00 | 8 | 46 | 0 | 8683 | 0 |
+| gas | 0 | 1.00 | 3 | 10 | 0 | 5 | 0 |
+| temporal_granularity | 0 | 1.00 | 3 | 6 | 0 | 5 | 0 |
+| created_date | 0 | 1.00 | 19 | 19 | 0 | 473 | 0 |
+| modified_date | 30289 | 0.70 | 0 | 26 | 11982 | 2887 | 0 |
+| directory | 0 | 1.00 | 54 | 94 | 0 | 36 | 0 |
+| activity_units | 33096 | 0.67 | 3 | 31 | 0 | 22 | 0 |
+| emissions_factor_units | 33090 | 0.67 | 0 | 44 | 42114 | 40 | 0 |
+| capacity_units | 47644 | 0.52 | 2 | 58 | 0 | 14 | 0 |
 
 **Variable type: numeric**
 
-| skim_variable      | n_missing | complete_rate |        mean |           sd |            p0 |        p25 |        p50 |         p75 |          p100 | hist  |
-|:-------------------|----------:|--------------:|------------:|-------------:|--------------:|-----------:|-----------:|------------:|--------------:|:------|
-| source_id          |         0 |          1.00 | 10272375.22 | 6.692248e+06 |  6.142400e+04 | 5017306.75 | 8180875.50 | 13166885.00 |  3.070776e+07 | ▇▇▂▃▁ |
-| lat                |         8 |          1.00 |      -16.45 | 8.380000e+00 | -3.365000e+01 |     -22.94 |     -18.40 |       -8.46 |  4.680000e+00 | ▃▇▅▆▁ |
-| lon                |         8 |          1.00 |      -46.24 | 6.450000e+00 | -7.344000e+01 |     -50.84 |     -46.53 |      -41.24 | -2.932000e+01 | ▁▁▇▇▂ |
-| emissions_quantity |     33869 |          0.66 |   -21812.98 | 6.386586e+06 | -1.254345e+09 |       0.00 |     278.03 |     6023.43 |  2.656355e+08 | ▁▁▁▁▇ |
-| activity           |     34379 |          0.66 |  2975670.33 | 7.380231e+07 |  0.000000e+00 |     246.67 |    2952.46 |    17022.76 |  8.604243e+09 | ▇▁▁▁▁ |
-| emissions_factor   |     77666 |          0.22 |       32.71 | 1.025050e+03 |  0.000000e+00 |       0.00 |       0.00 |        0.23 |  1.523900e+05 | ▇▁▁▁▁ |
-| capacity           |     34540 |          0.65 | 43432815.06 | 1.815366e+09 |  0.000000e+00 |    9666.33 |  578777.37 |  2720854.67 |  2.248459e+11 | ▇▁▁▁▁ |
-| capacity_factor    |     44035 |          0.56 |        7.54 | 1.550300e+02 |  0.000000e+00 |       0.00 |       0.01 |        0.01 |  2.409000e+04 | ▇▁▁▁▁ |
+| skim_variable | n_missing | complete_rate | mean | sd | p0 | p25 | p50 | p75 | p100 | hist |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|:---|
+| source_id | 0 | 1.00 | 10272375.22 | 6.692248e+06 | 6.142400e+04 | 5017306.75 | 8180875.50 | 13166885.00 | 3.070776e+07 | ▇▇▂▃▁ |
+| lat | 8 | 1.00 | -16.45 | 8.380000e+00 | -3.365000e+01 | -22.94 | -18.40 | -8.46 | 4.680000e+00 | ▃▇▅▆▁ |
+| lon | 8 | 1.00 | -46.24 | 6.450000e+00 | -7.344000e+01 | -50.84 | -46.53 | -41.24 | -2.932000e+01 | ▁▁▇▇▂ |
+| emissions_quantity | 33869 | 0.66 | -21812.98 | 6.386586e+06 | -1.254345e+09 | 0.00 | 278.03 | 6023.43 | 2.656355e+08 | ▁▁▁▁▇ |
+| activity | 34379 | 0.66 | 2975670.33 | 7.380231e+07 | 0.000000e+00 | 246.67 | 2952.46 | 17022.76 | 8.604243e+09 | ▇▁▁▁▁ |
+| emissions_factor | 77666 | 0.22 | 32.71 | 1.025050e+03 | 0.000000e+00 | 0.00 | 0.00 | 0.23 | 1.523900e+05 | ▇▁▁▁▁ |
+| capacity | 34540 | 0.65 | 43432815.06 | 1.815366e+09 | 0.000000e+00 | 9666.33 | 578777.37 | 2720854.67 | 2.248459e+11 | ▇▁▁▁▁ |
+| capacity_factor | 44035 | 0.56 | 7.54 | 1.550300e+02 | 0.000000e+00 | 0.00 | 0.01 | 0.01 | 2.409000e+04 | ▇▁▁▁▁ |
 
 **4.4) Verificar os tipos primários**
 

@@ -13,16 +13,17 @@ knitr::opts_chunk$set(
 ```
 
 
-![](img/logo01.png)
+![](img/FUNEP00153-Banner-1536x416.png)
 
 ```{r echo=FALSE, out.width = "100%", fig.align = "left", fig.cap=""}
-  knitr::include_graphics("img/todos.png")
+  knitr::include_graphics("img/luis-alan.png")
 ```
 
 
-# Introdução às Mudanças Climáticas Globais: Monitoramento de Emissões e Capturas de Gases do Efeito Estufa
+# Introdução às mudanças climáticas globais, impactos,
+adaptações e mitigação
 
-No minicurso falaremos sobre as bases físicas das mudanças climáticas globais, impactos, adaptações e necessidades de mitigação. Exploraremos também a plataforma [Climate TRACE](https://climatetrace.org/) para monitoramento de emissões de gases do efeito estufa em nível nacional. Além disso, haverá uma atividade prática com aquisição de dados, pré-processamento e visualização de dados com o R. 
+No minicurso falaremos sobre as bases físicas das mudanças climáticas globais, impactos, adaptações e necessidades de mitigação. Exploraremos também a plataforma [Climate TRACE](https://climatetrace.org/) para monitoramento de emissões de gases do efeito estufa em nível nacional. Além disso, haverá uma atividade prática com aquisição de dados, pré-processamento e visualização de dados com o $R$. 
 
 ---
 
@@ -30,7 +31,7 @@ No minicurso falaremos sobre as bases físicas das mudanças climáticas globais
 
 ![](img/ppt-logo.png){width=5%}
  
-### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao_daCosta.pdf)
+### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 
 ### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf)
