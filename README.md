@@ -26,9 +26,9 @@ pré-processamento e visualização de dados com o $`R`$.
 
 ### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
-### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf)
+<!-- ### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf) -->
 
-<img src="img/ppt-pdf.png" style="width:5.0%" />
+<!-- ![](img/ppt-pdf.png){width="5%"} -->
 
 [Mudanças do Clima - 2023 Relatório
 Síntese-pt.br](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
