@@ -24,17 +24,17 @@ No minicurso falaremos sobre as bases físicas das mudanças climáticas globais
 
 ------------------------------------------------------------------------
 
-
 <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/3cCNBWsF8x8?si=OfmtC9kqzNruVa7u&amp;start=742" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3cCNBWsF8x8?si=OfmtC9kqzNruVa7u&amp;start=742" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3cCNBWsF8x8?si=OfmtC9kqzNruVa7u&amp;start=742" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</iframe>
 
 ## 1) Apresentações
 
-![](img/ppt-logo.png){width="5%"}
+### 🧑‍💻 [Introdução às Mudanças Climáticas](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-Panosso.pdf)
 
-### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+### 🧑‍💻 [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 <!-- ### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf) -->
 

@@ -10,7 +10,7 @@ globais, impactos, adaptações e necessidades de mitigação. Exploraremos
 também a plataforma [Climate TRACE](https://climatetrace.org/) para
 monitoramento de emissões de gases do efeito estufa em nível nacional.
 Além disso, haverá uma atividade prática com aquisição de dados,
-pré-processamento e visualização de dados com o $`R`$.
+pré-processamento e visualização de dados com o $R$.
 
 ------------------------------------------------------------------------
 
@@ -22,9 +22,9 @@ pré-processamento e visualização de dados com o $`R`$.
 
 ## 1) Apresentações
 
-<img src="img/ppt-logo.png" style="width:5.0%" />
+### 🧑‍💻 [Introdução às Mudanças Climáticas](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-Panosso.pdf)
 
-### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+### 🧑‍💻 [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 <!-- ### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf) -->
 
