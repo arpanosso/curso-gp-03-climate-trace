@@ -1,6 +1,6 @@
 ---
-title: "Semana do Meio Ambiente"
-date: "07/07/2024"
+title: "SICA-2025"
+date: "08/10/2025"
 output: html_document
 ---
 
@@ -105,7 +105,7 @@ dados %>%
 
 ```{r}
 dados %>% 
-  filter(str_detect(municipio,"Jaboticabal"),
+  filter(str_detect(municipio,"Botucatu"),
          estado == "SP",
          ano == 2022,
          !sub_setor %in% c("forest-land-clearing",

@@ -5,24 +5,26 @@
 
 <img src="img/luis-alan.png" width="100%" style="display: block; margin: auto auto auto 0;" />
 
-# Introdução às mudanças climáticas globais, impactos,
-
-adaptações e mitigação
+# Introdução às mudanças climáticas globais, impactos, adaptações e mitigação
 
 No minicurso falaremos sobre as bases físicas das mudanças climáticas
 globais, impactos, adaptações e necessidades de mitigação. Exploraremos
 também a plataforma [Climate TRACE](https://climatetrace.org/) para
 monitoramento de emissões de gases do efeito estufa em nível nacional.
 Além disso, haverá uma atividade prática com aquisição de dados,
-pré-processamento e visualização de dados com o $R$.
+pré-processamento e visualização de dados com o $`R`$.
 
 ------------------------------------------------------------------------
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3cCNBWsF8x8?si=OfmtC9kqzNruVa7u&amp;start=760" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+
+</iframe>
 
 ## 1) Apresentações
 
 <img src="img/ppt-logo.png" style="width:5.0%" />
 
-### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao_daCosta-2025.pdf)
+### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 ### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf)
 

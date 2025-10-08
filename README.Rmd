@@ -12,39 +12,39 @@ knitr::opts_chunk$set(
 )
 ```
 
-
 ![](img/FUNEP00153-Banner-1536x416.png)
 
 ```{r echo=FALSE, out.width = "100%", fig.align = "left", fig.cap=""}
   knitr::include_graphics("img/luis-alan.png")
 ```
 
+# Introdução às mudanças climáticas globais, impactos, adaptações e mitigação
 
-# Introdução às mudanças climáticas globais, impactos,
-adaptações e mitigação
+No minicurso falaremos sobre as bases físicas das mudanças climáticas globais, impactos, adaptações e necessidades de mitigação. Exploraremos também a plataforma [Climate TRACE](https://climatetrace.org/) para monitoramento de emissões de gases do efeito estufa em nível nacional. Além disso, haverá uma atividade prática com aquisição de dados, pré-processamento e visualização de dados com o $R$.
 
-No minicurso falaremos sobre as bases físicas das mudanças climáticas globais, impactos, adaptações e necessidades de mitigação. Exploraremos também a plataforma [Climate TRACE](https://climatetrace.org/) para monitoramento de emissões de gases do efeito estufa em nível nacional. Além disso, haverá uma atividade prática com aquisição de dados, pré-processamento e visualização de dados com o $R$. 
+------------------------------------------------------------------------
 
----
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3cCNBWsF8x8?si=OfmtC9kqzNruVa7u&amp;start=760" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 
 ## 1) Apresentações
 
-![](img/ppt-logo.png){width=5%}
- 
-### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
+![](img/ppt-logo.png){width="5%"}
 
+### [Panorama das emissões no Brasil](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-daCosta.pdf)
 
 ### [Bases Físicas das MCG](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-LaScala.pdf)
 
-![](img/ppt-pdf.png){width=5%}
+![](img/ppt-pdf.png){width="5%"}
 
 [Mudanças do Clima - 2023 Relatório Síntese-pt.br](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
 
-___
+------------------------------------------------------------------------
 
 ## 2) Plataforma [Climate TRACE](https://climatetrace.org/)
 
----
+------------------------------------------------------------------------
 
 ## 3) Aquisição de Dados
 
@@ -52,73 +52,72 @@ Nesta atividade, você aprenderá a navegar na plataforma [Climate TRACE](https:
 
 ### Passo a Passo
 
-**Acesse a Plataforma**  
-  + Abra seu navegador de internet preferido.   
-  + Digite o endereço da plataforma na barra de endereços (https://climatetrace.org/) ou clique no link de acesso.
+**Acesse a Plataforma**\
++ Abra seu navegador de internet preferido.\
++ Digite o endereço da plataforma na barra de endereços (<https://climatetrace.org/>) ou clique no link de acesso.
 
 ![](img/aq-ct01.png)
 
-**Criação de Conta ou Login**  
-  + No momento, não é necessário criar uma conta ou fazer login na plataforma para acessar os dados.    
-  + Provavelmente, essa opção será implementada no futuro.  
-  + Portanto, você pode prosseguir diretamente para a navegação e download dos dados.
+**Criação de Conta ou Login**\
++ No momento, não é necessário criar uma conta ou fazer login na plataforma para acessar os dados.\
++ Provavelmente, essa opção será implementada no futuro.\
++ Portanto, você pode prosseguir diretamente para a navegação e download dos dados.
 
-**Navegação até a Base de Dados**  
-  + No canto direito inferior, clique no botão ![](img/aq-ct02.png){width=15%}.  
-  + Você será direcionado para a página abaixo. 
-  
-![](img/aq-ct03.png)  
-  
-  + Observe que a aquisição de dados poderá ser feita via download ou por API (Interface de Programação de Aplicações). Nessa prática, por questões didáticas, optaremos pela aquisição via download.  
-  + Role a página para baixo até encontrar a seção ou aba chamada "Bases de Dados", "Data Sets" ou algo semelhante. Clique nesta opção.
-  
+**Navegação até a Base de Dados**\
++ No canto direito inferior, clique no botão ![](img/aq-ct02.png){width="15%"}.\
++ Você será direcionado para a página abaixo.
+
+![](img/aq-ct03.png)
+
+-   Observe que a aquisição de dados poderá ser feita via download ou por API (Interface de Programação de Aplicações). Nessa prática, por questões didáticas, optaremos pela aquisição via download.\
+-   Role a página para baixo até encontrar a seção ou aba chamada "Bases de Dados", "Data Sets" ou algo semelhante. Clique nesta opção.
+
 ![](img/aq-ct04.png)
-  
-  + Clique nesta opção **Country**.  
-  + Uma nova página será carregada dinamicamente com o alfabeto para auxiliar na procura das bases de dados disponíveis.
-  + Clique em **B** e procure por *BRAZIL*.
-  
-![](img/aq-ct05.png)  
 
-**Download dos Dados**  
- + Encontre o botão ![](img/aq-ct051.png).  
- + Clique sobre ele para fazer o download dos dados no formato CSV.   
- +  O download será iniciado automaticamente.   
- + Aguarde até que o arquivo seja salvo em seu computador.
- 
- **OBS:** CSV (Comma-Separated Values) é um formato de arquivo simples e amplamente utilizado para armazenar dados tabulares.
+-   Clique nesta opção **Country**.\
+-   Uma nova página será carregada dinamicamente com o alfabeto para auxiliar na procura das bases de dados disponíveis.
+-   Clique em **B** e procure por *BRAZIL*.
 
-![](img/aq-ct06.png)  
+![](img/aq-ct05.png)
+
+**Download dos Dados**\
++ Encontre o botão ![](img/aq-ct051.png).\
++ Clique sobre ele para fazer o download dos dados no formato CSV.\
++ O download será iniciado automaticamente.\
++ Aguarde até que o arquivo seja salvo em seu computador.
+
+**OBS:** CSV (Comma-Separated Values) é um formato de arquivo simples e amplamente utilizado para armazenar dados tabulares.
+
+![](img/aq-ct06.png)
 
 Após o download terminar, acesse a pasta de downloads do seu computar e observe o arquivo:
 
-![](img/aq-ct07.png) 
+![](img/aq-ct07.png)
 
 **Lidando com Arquivos ZIP**
 
-  + Muitas vezes, os dados são compactados em um arquivo ZIP para facilitar o download. Um arquivo ZIP é um formato de arquivo que contém um ou mais arquivos compactados para reduzir o tamanho total e facilitar a transferência.   
-  + Para descompactar o arquivo ZIP:  
-      + No Windows: Clique com o botão direito no arquivo ZIP e selecione "Extrair Tudo...", depois siga as instruções para escolher um local onde os arquivos serão extraídos.  
-      + Por padrão, os dados serão descompatados dentro de uma pasta com nome BRA, semelhante ao nome do arquivo baixado, localizada no mesmo diretório onde o arquivo **BRA.zip** se encontra.
-  + Após descompactar, você verá os arquivos de dados e metadados que podem ser abertos e analisados.
+-   Muitas vezes, os dados são compactados em um arquivo ZIP para facilitar o download. Um arquivo ZIP é um formato de arquivo que contém um ou mais arquivos compactados para reduzir o tamanho total e facilitar a transferência.\
+-   Para descompactar o arquivo ZIP:
+    -   No Windows: Clique com o botão direito no arquivo ZIP e selecione "Extrair Tudo...", depois siga as instruções para escolher um local onde os arquivos serão extraídos.\
+    -   Por padrão, os dados serão descompatados dentro de uma pasta com nome BRA, semelhante ao nome do arquivo baixado, localizada no mesmo diretório onde o arquivo **BRA.zip** se encontra.
+-   Após descompactar, você verá os arquivos de dados e metadados que podem ser abertos e analisados.
 
-![](img/aq-ct08.png) 
+![](img/aq-ct08.png)
 
 **OBS:** Metadados são informações adicionais que descrevem os dados principais. Eles podem incluir: descrição das variáveis; explicação do que cada coluna ou campo de dados representa; unidades usadas; ou seja, qualquer outra informação relevante que ajude a entender e utilizar os dados corretamente.
 
-**Dicas Adicionais**  
-  + *Organização*: Crie uma pasta dedicada em seu computador para armazenar os dados baixados, facilitando a organização e o acesso futuro.  
-  + *Documentação*: Leia a [documentação](https://github.com/climatetracecoalition/methodology-documents/tree/main/2023) ou notas técnicas fornecidas pela plataforma para entender melhor os dados e suas limitações: [Link](https://climatetrace.org/approach).  
-  + *Backup*: Sempre faça backup dos dados importantes para evitar perdas acidentais.
+**Dicas Adicionais**\
++ *Organização*: Crie uma pasta dedicada em seu computador para armazenar os dados baixados, facilitando a organização e o acesso futuro.\
++ *Documentação*: Leia a [documentação](https://github.com/climatetracecoalition/methodology-documents/tree/main/2023) ou notas técnicas fornecidas pela plataforma para entender melhor os dados e suas limitações: [Link](https://climatetrace.org/approach).\
++ *Backup*: Sempre faça backup dos dados importantes para evitar perdas acidentais.
 
----
+------------------------------------------------------------------------
 
 ## 4) Pré-Processamento de Dados (Faxina de Dados)
 
-O pré-processamento de dados, ou faxina de dados, é uma das etapas mais importantes do Data Science. Antes de realizar qualquer análise ou construção de modelos, é essencial garantir que os dados estejam limpos e estruturados corretamente. 
+O pré-processamento de dados, ou faxina de dados, é uma das etapas mais importantes do Data Science. Antes de realizar qualquer análise ou construção de modelos, é essencial garantir que os dados estejam limpos e estruturados corretamente.
 
-![](img/data-science-cycle.png)
-O Ciclo do Data Science.
+![](img/data-science-cycle.png) O Ciclo do Data Science.
 
 Dados de má qualidade podem levar a resultados imprecisos e análises equivocadas. Por isso, dedicar tempo ao pré-processamento assegura que as análises subsequentes sejam baseadas em informações confiáveis e precisas.
 
@@ -147,7 +146,7 @@ glimpse(dados_crus)
 
 **4.3) Correção de Inconsistências**
 
-Verifique e corrija valores ausentes (*missing values* ou *Not Available* - NA) e inconsistências nos dados. 
+Verifique e corrija valores ausentes (*missing values* ou *Not Available* - NA) e inconsistências nos dados.
 
 ```{r}
 skimr::skim(dados_crus)
@@ -155,7 +154,7 @@ skimr::skim(dados_crus)
 
 **4.4) Verificar os tipos primários**
 
-Verifique o tipo primário das variáveis, transforme, se necessário. Por exemplo, vamos transformar as variáveis "_time" e "_date" para datas, ao invés de caracteres. 
+Verifique o tipo primário das variáveis, transforme, se necessário. Por exemplo, vamos transformar as variáveis "\_time" e "\_date" para datas, ao invés de caracteres.
 
 ```{r}
 dados_crus <- dados_crus %>%
@@ -175,9 +174,10 @@ Algumas valiosas informações estão presentes nas variáveis, por exemplo, obs
 ```{r}
 dados_crus$directory[1]
 ```
-Ela identifica qual o caminho dentro do computador do arquivo CSV compilado em `dados_crus`. Essa coluna possui informações a respeito do setor de emissão e seu respectivo sub-setor:  
-  + Setor: "forestry_and_land_use"  
-  + Sub-setor "forest-land-fires"
+
+Ela identifica qual o caminho dentro do computador do arquivo CSV compilado em `dados_crus`. Essa coluna possui informações a respeito do setor de emissão e seu respectivo sub-setor:\
++ Setor: "forestry_and_land_use"\
++ Sub-setor "forest-land-fires"
 
 Então, como estratégia, vamos criar duas novas variáveis a partir dessa variável, utilizando função para manipulação de strings.
 
@@ -203,7 +203,6 @@ dados_crus <- dados_crus %>%
 glimpse(dados_crus)
 ```
 
-
 **4.6) Integração entre bases de dados**
 
 A base do Climate TRACE não possui informações como o Estado, o Município, o Bioma, as Terras Indígenas e as Áreas de Conservação. Essas informações podem ser integralizadas à base a partir do pacote `{geombr}`, desenvolvido pelo IBGE.
@@ -220,14 +219,13 @@ dados_crus <- dados_crus %>%
   )
 ```
 
-
 Agora é um bom momento para a visualização dos dados
+
 ```{r}
 dados_crus %>% 
   ggplot(aes(x=lon,y=lat)) +
   geom_point()
 ```
-
 
 Utilizando as ferramentas de filtro, podemos inspecionar os pontos por estado.
 
@@ -238,17 +236,14 @@ dados_crus %>%
   geom_point() 
 ```
 
-
 **4.7) Demais etapas:**
 
-  + Remoção de Duplicatas    
-  + Normalização e Padronização    
-  + Tratamento de Outliers    
-  + Validação Final    
+-   Remoção de Duplicatas\
+-   Normalização e Padronização\
+-   Tratamento de Outliers\
+-   Validação Final
 
----
-
-
+------------------------------------------------------------------------
 
 ```{r}
 # estados  %>%
@@ -286,7 +281,6 @@ dados_crus %>%
 #   tema_mapa()
 ```
 
-
 ```{r}
 # dados %>%
 #   filter(area_conservacao,
@@ -310,7 +304,6 @@ dados_crus %>%
 #   summarise(e_count = n())
 ```
 
-
 ```{r}
 # dados %>%
 #   filter(area_conservacao,
@@ -331,7 +324,6 @@ dados_crus %>%
 #   group_by(classe_emissao)  %>%
 #   summarise(e_count = n(),.groups = 'drop')
 ```
-
 
 ```{r}
 # dados %>%
@@ -373,7 +365,6 @@ dados_crus %>%
 #   theme_bw()
 ```
 
-
 ```{r}
 # dados %>%
 #   filter(area_conservacao,
@@ -387,7 +378,6 @@ dados_crus %>%
 #   )
 ```
 
-
 ```{r}
 # dados %>%
 #   filter(area_conservacao,
@@ -399,7 +389,6 @@ dados_crus %>%
 #     .groups = 'drop'
 #   )
 ```
-
 
 ```{r}
 # dados %>%
@@ -414,7 +403,6 @@ dados_crus %>%
 #   geom_col(color="black",fill="gray") +
 #   theme_bw()
 ```
-
 
 ```{r}
 # dados %>%
@@ -434,4 +422,3 @@ dados_crus %>%
 #   theme(axis.text.x = element_text(angle = 45,hjust = 1))+
 #   theme_bw()
 ```
-
