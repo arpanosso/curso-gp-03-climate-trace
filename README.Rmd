@@ -7,7 +7,7 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE, warning = FALSE,
-  error = FALSE, message = FALSE,
+  error = FALSE, message = FALSE,eval = FALSE,
   comment = "#>"
 )
 ```
