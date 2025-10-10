@@ -14,13 +14,18 @@ pré-processamento e visualização de dados com o $R$.
 
 ------------------------------------------------------------------------
 
-<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/3cCNBWsF8x8?si=OfmtC9kqzNruVa7u&amp;start=742" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+## 1) Divulgação da Pesquisa
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3cCNBWsF8x8?si=OfmtC9kqzNruVa7u&amp;start=742" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+![](img/reporter-eco-2025.png)
 
-</iframe>
+### [Acesse o Link](https://www.youtube.com/embed/3cCNBWsF8x8?si=OfmtC9kqzNruVa7u&start=742)
 
-## 1) Apresentações
+![](img/artigo-2025.png)
+
+\###[Download do
+Artigo](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/daCosta-2025.pdf)
+
+## 2) Apresentações
 
 ### 🧑‍💻 [Introdução às Mudanças Climáticas](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-Panosso.pdf)
 
@@ -30,16 +35,15 @@ pré-processamento e visualização de dados com o $R$.
 
 <!-- ![](img/ppt-pdf.png){width="5%"} -->
 
-[Mudanças do Clima - 2023 Relatório
-Síntese-pt.br](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
+### 🧾 [Mudanças do Clima - 2023 Relatório Síntese-pt.br](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
 
 ------------------------------------------------------------------------
 
-## 2) Plataforma [Climate TRACE](https://climatetrace.org/)
+## 3) Plataforma [Climate TRACE](https://climatetrace.org/)
 
 ------------------------------------------------------------------------
 
-## 3) Aquisição de Dados
+## 4) Aquisição de Dados
 
 Nesta atividade, você aprenderá a navegar na plataforma [Climate
 TRACE](https://climatetrace.org/), selecionar a base de dados de
@@ -137,7 +141,7 @@ acidentais.
 
 ------------------------------------------------------------------------
 
-## 4) Pré-Processamento de Dados (Faxina de Dados)
+## 5) Pré-Processamento de Dados (Faxina de Dados)
 
 O pré-processamento de dados, ou faxina de dados, é uma das etapas mais
 importantes do Data Science. Antes de realizar qualquer análise ou
