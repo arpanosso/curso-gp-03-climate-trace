@@ -18,14 +18,13 @@ pré-processamento e visualização de dados com o $R$.
 
 ![](img/reporter-eco-2025.png)
 
-### [Acesse o Link](https://www.youtube.com/embed/3cCNBWsF8x8?si=OfmtC9kqzNruVa7u&start=742)
+#### [Link de acesso à repostagem](https://www.youtube.com/embed/3cCNBWsF8x8?si=OfmtC9kqzNruVa7u&start=742)
 
 ![](img/artigo-2025.png)
 
-\###[Download do
-Artigo](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/daCosta-2025.pdf)
+#### [Download do Artigo](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/daCosta-2025.pdf)
 
-## 2) Apresentações
+## 2) Apresentações e Relatório do Clima
 
 ### 🧑‍💻 [Introdução às Mudanças Climáticas](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/apresentacao-Panosso.pdf)
 
@@ -35,7 +34,7 @@ Artigo](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/ma
 
 <!-- ![](img/ppt-pdf.png){width="5%"} -->
 
-### 🧾 [Mudanças do Clima - 2023 Relatório Síntese-pt.br](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
+### 🧾 [Mudanças do Clima - 2023 Relatório Síntese](https://raw.githubusercontent.com/arpanosso/curso-gp-03-climate-trace/master/Docs/IPCC_Longer_Report_2023_Portugues.pdf)
 
 ------------------------------------------------------------------------
 
@@ -82,9 +81,10 @@ dos dados.
 ![](img/aq-ct04.png)
 
 - Clique nesta opção **Country**.  
+- Em `Select Emission Type` seleciona **CO2e100yr**
 - Uma nova página será carregada dinamicamente com o alfabeto para
   auxiliar na procura das bases de dados disponíveis.
-- Clique em **B** e procure por *BRAZIL*.
+- Clique em na Letra e baixe a base para o País desejado.
 
 ![](img/aq-ct05.png)
 

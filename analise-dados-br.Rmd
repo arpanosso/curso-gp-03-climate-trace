@@ -145,7 +145,6 @@ cidades %>%
 Melhorando a apresentação dos resultados. Atribuindo uma classificação para o balanço (total de emissões).
 
 ```{r}
-meu_estado <- "SP"
 meu_ano <- 2022
 cidades %>%
   filter(abbrev_state == meu_estado) %>% 
@@ -217,7 +216,6 @@ dados %>%
 
 ### Identificar qual a principal fonte no município do estado.
 ```{r}
-meu_estado <- "SP"
 cidades %>%
   filter(abbrev_state == meu_estado) %>% 
   inner_join(dados %>%
